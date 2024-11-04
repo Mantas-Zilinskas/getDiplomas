@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "C:\\Zgarbaj\\code\\getDiplomas\\System.Server\\..\\system.client",
+"WorkingDirectory": "C:\\Users\\37064\\source\\repos\\getDiplomas\\System.Server\\..\\system.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

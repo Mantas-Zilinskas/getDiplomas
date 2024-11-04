@@ -1,23 +1,11 @@
 {
   "Version": 1,
-  "Hash": "oHJ78Nk9PAUQd5aeo3+XYxNFKuxPWJgppw843M9sHQA=",
+  "Hash": "VbgLLVv7e3MKyBJMUhjHkIPJ2JBNm8Zc/qKNvxjxurw=",
   "Source": "System.Server",
   "BasePath": "_content/System.Server",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [
-    {
-      "Identity": "C:\\Zgarbaj\\code\\getDiplomas\\system.client\\system.client.esproj",
-      "Version": 2,
-      "Source": "system.client",
-      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
-      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
-    }
-  ],
+  "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
   "Assets": []
 }
