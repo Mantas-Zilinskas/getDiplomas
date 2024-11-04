@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\37064\\source\\repos\\getDiplomas\\",
+  "WorkspaceRootPath": "C:\\Users\\37064\\Desktop\\getDiplomas\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|c:\\users\\37064\\source\\repos\\getdiplomas\\system.server\\system.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|c:\\users\\37064\\desktop\\getdiplomas\\system.server\\system.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|solutionrelative:system.server\\system.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
@@ -24,9 +24,9 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "System.Server.csproj",
-              "DocumentMoniker": "C:\\Users\\37064\\source\\repos\\getDiplomas\\System.Server\\System.Server.csproj",
+              "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\System.Server.csproj",
               "RelativeDocumentMoniker": "System.Server\\System.Server.csproj",
-              "ToolTip": "C:\\Users\\37064\\source\\repos\\getDiplomas\\System.Server\\System.Server.csproj",
+              "ToolTip": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\System.Server.csproj",
               "RelativeToolTip": "System.Server\\System.Server.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",

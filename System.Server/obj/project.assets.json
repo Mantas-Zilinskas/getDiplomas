@@ -464,11 +464,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\37064\\Source\\Repos\\getDiplomas\\System.Server\\System.Server.csproj",
+      "projectUniqueName": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\System.Server.csproj",
       "projectName": "System.Server",
-      "projectPath": "C:\\Users\\37064\\Source\\Repos\\getDiplomas\\System.Server\\System.Server.csproj",
+      "projectPath": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\System.Server.csproj",
       "packagesPath": "C:\\Users\\37064\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\37064\\Source\\Repos\\getDiplomas\\System.Server\\obj\\",
+      "outputPath": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\37064\\AppData\\Roaming\\NuGet\\NuGet.Config",
