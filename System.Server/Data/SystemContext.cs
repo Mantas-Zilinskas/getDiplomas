@@ -11,6 +11,11 @@ namespace System.Server.Data
         public DbSet<Product> Products { get; set; } = null!;
         public DbSet<ProductTax> ProductTaxes { get; set; } = null!;
         public DbSet<Tax> Taxes { get; set; } = null!;
+        public DbSet<Customer> Customers { get; set; } = null!;
+        public DbSet<Payment> Payments { get; set; } = null!;
+        public DbSet<Reservation> Reservations { get; set; } = null!;
+        public DbSet<Service> Services { get; set; } = null!;
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,6 +42,14 @@ namespace System.Server.Data
 
             modelBuilder.Entity<OrderProduct>()
                 .Property(op => op.Price)
+                .HasPrecision(10, 2);
+            
+            modelBuilder.Entity<Service>()
+                .Property(s => s.Charge)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.Amount)
                 .HasPrecision(10, 2);
         }
     }
