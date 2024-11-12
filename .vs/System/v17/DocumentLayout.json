@@ -3,6 +3,46 @@
   "WorkspaceRootPath": "C:\\Users\\37064\\Desktop\\getDiplomas\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|c:\\users\\37064\\desktop\\getdiplomas\\system.server\\migrations\\20241111192230_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|solutionrelative:system.server\\migrations\\20241111192230_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|c:\\users\\37064\\desktop\\getdiplomas\\system.server\\data\\systemcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|solutionrelative:system.server\\data\\systemcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|c:\\users\\37064\\desktop\\getdiplomas\\system.server\\models\\tax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|solutionrelative:system.server\\models\\tax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|c:\\users\\37064\\desktop\\getdiplomas\\system.server\\models\\producttax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|solutionrelative:system.server\\models\\producttax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|c:\\users\\37064\\desktop\\getdiplomas\\system.server\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|solutionrelative:system.server\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|c:\\users\\37064\\desktop\\getdiplomas\\system.server\\models\\ordertax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|solutionrelative:system.server\\models\\ordertax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|c:\\users\\37064\\desktop\\getdiplomas\\system.server\\models\\orderproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|solutionrelative:system.server\\models\\orderproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|c:\\users\\37064\\desktop\\getdiplomas\\system.server\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|solutionrelative:system.server\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Migrations\\20241111185117_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:System.Server\\Migrations\\20241111185117_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F453EA91-EB9E-41D0-9E26-C7A598B9B14F}|system.client3\\system.client3.esproj|c:\\users\\37064\\desktop\\getdiplomas\\system.client3\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F453EA91-EB9E-41D0-9E26-C7A598B9B14F}|system.client3\\system.client3.esproj|solutionrelative:system.client3\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|c:\\users\\37064\\desktop\\getdiplomas\\system.server\\system.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{15CCFAF2-12CC-46DA-89A5-6FC5B3B49E62}|System.Server\\System.Server.csproj|solutionrelative:system.server\\system.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
@@ -23,6 +63,136 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "20241111192230_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Migrations\\20241111192230_InitialCreate.cs",
+              "RelativeDocumentMoniker": "System.Server\\Migrations\\20241111192230_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Migrations\\20241111192230_InitialCreate.cs",
+              "RelativeToolTip": "System.Server\\Migrations\\20241111192230_InitialCreate.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T19:22:30.794Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OrderProduct.cs",
+              "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\OrderProduct.cs",
+              "RelativeDocumentMoniker": "System.Server\\Models\\OrderProduct.cs",
+              "ToolTip": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\OrderProduct.cs",
+              "RelativeToolTip": "System.Server\\Models\\OrderProduct.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:47:48.979Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "OrderTax.cs",
+              "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\OrderTax.cs",
+              "RelativeDocumentMoniker": "System.Server\\Models\\OrderTax.cs",
+              "ToolTip": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\OrderTax.cs",
+              "RelativeToolTip": "System.Server\\Models\\OrderTax.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:44:35.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "System.Server\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\Product.cs",
+              "RelativeToolTip": "System.Server\\Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:42:11.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProductTax.cs",
+              "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\ProductTax.cs",
+              "RelativeDocumentMoniker": "System.Server\\Models\\ProductTax.cs",
+              "ToolTip": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\ProductTax.cs",
+              "RelativeToolTip": "System.Server\\Models\\ProductTax.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:48:25.246Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Tax.cs",
+              "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\Tax.cs",
+              "RelativeDocumentMoniker": "System.Server\\Models\\Tax.cs",
+              "ToolTip": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\Tax.cs",
+              "RelativeToolTip": "System.Server\\Models\\Tax.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:49:03.083Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SystemContext.cs",
+              "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Data\\SystemContext.cs",
+              "RelativeDocumentMoniker": "System.Server\\Data\\SystemContext.cs",
+              "ToolTip": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Data\\SystemContext.cs",
+              "RelativeToolTip": "System.Server\\Data\\SystemContext.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAIwCcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:52:52.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "System.Server\\Models\\Order.cs",
+              "ToolTip": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Models\\Order.cs",
+              "RelativeToolTip": "System.Server\\Models\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T16:54:20.625Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20241111185117_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Migrations\\20241111185117_InitialCreate.cs",
+              "RelativeDocumentMoniker": "System.Server\\Migrations\\20241111185117_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\Migrations\\20241111185117_InitialCreate.cs",
+              "RelativeToolTip": "System.Server\\Migrations\\20241111185117_InitialCreate.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAQwAsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:51:17.645Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\system.client3\\package.json",
+              "RelativeDocumentMoniker": "system.client3\\package.json",
+              "ToolTip": "C:\\Users\\37064\\Desktop\\getDiplomas\\system.client3\\package.json",
+              "RelativeToolTip": "system.client3\\package.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-04T20:01:55.031Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "System.Server.csproj",
               "DocumentMoniker": "C:\\Users\\37064\\Desktop\\getDiplomas\\System.Server\\System.Server.csproj",
               "RelativeDocumentMoniker": "System.Server\\System.Server.csproj",
