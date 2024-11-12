@@ -1,18 +1,3 @@
-using System.Server.Data;
-using System.Server.Models;
-using SystemContext context = new();
-Product water = new Product()
-{
-    OrderId = 1,
-    Name = "Water",
-    Price = 2.54M,
-    Quantity = 1,
-    DiscountId = 0
-};
-context.Products.Add(water);
-context.SaveChanges();
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
