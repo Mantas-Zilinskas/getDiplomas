@@ -1,13 +1,10 @@
-﻿namespace System.Server.Models
+﻿using System.Globalization;
+using System.Server.Enums;
+
+namespace System.Server.Models
 {
     public class Payment
     {
-        public enum PaymentMethod
-        {
-            Cash,
-            CreditCard,
-            GiftCard
-        }
         public long Id { get; set; }
         public long OrderId { get; set; }
         public decimal Amount { get; set; }

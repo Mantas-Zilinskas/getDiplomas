@@ -1,13 +1,9 @@
-﻿namespace System.Server.Models
+﻿using System.Server.Enums;
+
+namespace System.Server.Models
 {
     public class Order
     {
-        public enum OrderStatus
-        {
-            Open,
-            Closed,
-            Refunded
-        }
         public long Id { get; set; }
         public long UserId { get; set; }
         public long DiscountId { get; set; }
