@@ -35,11 +35,11 @@ namespace System.Server.Controllers
             
             return Ok(returnable);
         }
-        [HttpPut("{taxID}")]
+        [HttpPut("{taxId}")]
         public IActionResult Put(int taxId, [FromBody] TaxDTO tax)
         {
-            string obj = JsonSerializer.Serialize(tax);
             Console.WriteLine(taxId);
+            string obj = JsonSerializer.Serialize(tax);
             Console.WriteLine(obj);
 
             return Ok(obj);
