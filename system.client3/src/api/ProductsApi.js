@@ -1,9 +1,7 @@
+export const getProducts = (object) => {
 
-
-export const createOrder = (object) => {
-
-    fetch('https://localhost:7089/api/Order', {
-        method: 'POST',
+    fetch('https://localhost:7089/api/Products', {
+        method: 'Get',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -20,68 +18,14 @@ export const createOrder = (object) => {
     })
 }
 
-export const getOrder = (order) => {
+export const createProduct = (object) => {
 
-    fetch('https://localhost:7089/api/Order/' + order, {
-        method: 'Get',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    }).then(response => {
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-        return response.json(); // Parse the JSON response
-    }).then(data => {
-        console.log("Received response:", data); // Log the array of strings received back
-    }).catch(error => {
-        console.error("There was a problem with the fetch operation:", error);
-    })
-}
-
-export const updateOrder = (orderId, orderUpdate) => {
-
-    fetch('https://localhost:7089/api/Order/' + orderId, {
-        method: 'Put',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderUpdate),
-    }).then(response => {
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-        return response; // Parse the JSON response
-    }).catch(error => {
-        console.error("There was a problem with the fetch operation:", error);
-    })
-}
-
-export const deleteOrder = (orderId) => {
-
-    fetch('https://localhost:7089/api/Order/' + orderId, {
-        method: 'Delete',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    }).then(response => {
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-        return response; // Parse the JSON response
-    }).catch(error => {
-        console.error("There was a problem with the fetch operation:", error);
-    })
-}
-
-export const payOrder = (orderId, payment) => {
-
-    fetch('https://localhost:7089/api/Order/' + orderId + "/Pay", {
+    fetch('https://localhost:7089/api/Products', {
         method: 'Post',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payment)
+        body: JSON.stringify(object) // Convert JavaScript object to JSON string
     }).then(response => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
@@ -89,6 +33,62 @@ export const payOrder = (orderId, payment) => {
         return response.json(); // Parse the JSON response
     }).then(data => {
         console.log("Received response:", data); // Log the array of strings received back
+    }).catch(error => {
+        console.error("There was a problem with the fetch operation:", error);
+    })
+}
+
+export const getProduct = (id) => {
+
+    fetch('https://localhost:7089/api/Products/' + id, {
+        method: 'Get',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.json(); // Parse the JSON response
+    }).then(data => {
+        console.log("Received response:", data); // Log the array of strings received back
+    }).catch(error => {
+        console.error("There was a problem with the fetch operation:", error);
+    })
+}
+
+export const updateProduct = (id, object) => {
+
+    fetch('https://localhost:7089/api/Products/' + id, {
+        method: 'Put',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(object) // Convert JavaScript object to JSON string
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.json(); // Parse the JSON response
+    }).then(data => {
+        console.log("Received response:", data); // Log the array of strings received back
+    }).catch(error => {
+        console.error("There was a problem with the fetch operation:", error);
+    })
+}
+
+export const deleteProduct = (id) => {
+
+    fetch('https://localhost:7089/api/Products/' + id, {
+        method: 'Delete',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response;
     }).catch(error => {
         console.error("There was a problem with the fetch operation:", error);
     })

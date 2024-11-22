@@ -10,15 +10,3 @@ namespace System.Server.Models.DTO
         public PaymentMethod Method { get; set; }
     }
 }
-
-//Payment:
-//type: object
-//properties:
-//        id:
-//type: integer
-//amount:
-//          type: number
-//          format: float
-//        method:
-//          type: string
-//          enum: [Cash, CreditCard, GiftCard]
