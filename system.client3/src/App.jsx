@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { createTax } from './api/TaxApi'
 import { createOrder, getOrder, updateOrder, deleteOrder, payOrder } from './api/OrderApi'
 import { getProducts, createProduct, getProduct, updateProduct, deleteProduct} from './api/ProductsApi'
 
@@ -62,6 +63,9 @@ function App() {
     }
 
   return (
+          <button onClick={() => createTax()}>
+              click me
+          </button>
     <>                         
           <button onClick={() => createOrder(myOrderDTO)}>create Order</button>
           <button onClick={() => getOrder(5)}>Get Order</button>
