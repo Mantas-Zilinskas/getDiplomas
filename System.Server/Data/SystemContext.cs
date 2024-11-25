@@ -16,12 +16,17 @@ namespace System.Server.Data
         public DbSet<Reservation> Reservations { get; set; } = null!;
         public DbSet<Service> Services { get; set; } = null!;
 
+        public SystemContext(DbContextOptions<SystemContext> options)
+            : base(options)
+        {
+        }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SystemDatabase;Integrated Security=True;");
         }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>()

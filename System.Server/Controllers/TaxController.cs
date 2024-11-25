@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.Json;
+using System.Server.IServices;
+using System.Server.Models;
 using System.Server.Models.DTO;
 using System.Text.Json;
 
@@ -8,32 +11,41 @@ namespace System.Server.Controllers
     [ApiController]
     public class TaxController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
-        {
-            List<TaxDTO> list = new List<TaxDTO>();
-            list.Add(new TaxDTO());
-            list.Add(new TaxDTO());
+        private readonly ITaxService _taxService;
 
-            string returnable = JsonSerializer.Serialize(list);
-            return Ok(returnable);
+        public TaxController(ITaxService taxService)
+        { 
+            _taxService = taxService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        { 
+            var taxes = await _taxService.GetAllTaxes();
+            return Ok(taxes);
         }
         [HttpPost]
-        public IActionResult Post([FromBody] TaxDTO tax)
+        public async Task<IActionResult> Create([FromBody] Tax tax)
         {
-            string obj = JsonSerializer.Serialize(tax);
-            Console.WriteLine(obj);
+            if (tax == null)
+            {
+                return BadRequest();
+            }
 
-            return Ok(obj);
+            await _taxService.CreateTax(tax);
+            return Ok();
+
         }
-        [HttpGet("{taxId}")]
-        public IActionResult Get(int taxId)
-        {   
-            Console.WriteLine(taxId);
-            var tax = new TaxDTO();
-            string returnable = JsonSerializer.Serialize(tax);
+        [HttpGet("{taxId}")] // dont work yet
+        public async Task<IActionResult> GetById(int id)
+        { 
+            var product = await _taxService.GetTaxById(id);
+            if (product == null)
+            { 
+                return NotFound();
+            }
             
-            return Ok(returnable);
+            return Ok(product);
         }
         [HttpPut("{taxId}")]
         public IActionResult Put(int taxId, [FromBody] TaxDTO tax)
