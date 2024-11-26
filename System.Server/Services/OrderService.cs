@@ -12,6 +12,10 @@ namespace System.Server.Services
         private readonly SystemContext _context;
         public OrderService(SystemContext context) { _context = context; }
 
+        public async Task<IEnumerable<Order>> GetAllOrders()
+        {
+            return await _context.Orders.ToListAsync();
+        }
         public async Task AddOrder(Order order)
         {
             _context.Orders.Add(order);
