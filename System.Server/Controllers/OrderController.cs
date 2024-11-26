@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Server.IServices;
 using System.Server.Models;
 using System.Server.Models.DTO;
 using System.Text.Json;
@@ -10,15 +11,22 @@ namespace System.Server.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult Post([FromBody] OrderResponseDTO order)
-        {
-            Console.WriteLine(JsonSerializer.Serialize(order));
-            /////////////////////////////////////////////////////////////////
-            var obj = new OrderDTO();
-            string returnable = JsonSerializer.Serialize(obj);
+        private readonly IOrderService _orderService;
 
-            return Ok(returnable);
+        public OrderController(IOrderService orderService)
+        {
+            _orderService = orderService;
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Order order)
+        {
+            if (order == null)
+            { return BadRequest(); }
+
+            await _orderService.AddOrder(order);
+            return Ok();
         }
 
         [HttpGet("{orderId}")]
