@@ -29,14 +29,18 @@ namespace System.Server.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("{orderId}")]
+        public IActionResult Get(int orderId)
         {
-            var orders = await _orderService.GetAllOrders();
-            return Ok(orders);
+            Console.WriteLine(orderId);
+            /////////////////////////////////////////////////////////////////
+            var obj = new OrderDTO();
+            string returnable = JsonSerializer.Serialize(obj);
+
+            return Ok(returnable);
         }
 
-        /*[HttpPut("{orderId}")]
+        [HttpPut("{orderId}")]
         public IActionResult Put(int orderId, [FromBody] OrderUpdateDTO order)
         {
             Console.WriteLine(orderId);
@@ -65,6 +69,6 @@ namespace System.Server.Controllers
             string returnable = JsonSerializer.Serialize(obj);
 
             return Ok(returnable);
-        }*/
+        }
     }
 }
