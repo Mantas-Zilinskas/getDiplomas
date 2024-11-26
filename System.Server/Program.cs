@@ -26,6 +26,8 @@ builder.Services.AddDbContext<SystemContext>(options =>
 
 builder.Services.AddScoped<ITaxService, TaxService>();
 
+builder.Services.AddScoped<IOrderService, OrderService>();
+
 var app = builder.Build();
 app.UseCors("AllowAllOrigins");
 app.UseDefaultFiles();
