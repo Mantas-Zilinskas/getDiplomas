@@ -22,8 +22,10 @@ export function CatalogLayout() {
                 <h1>Im Catalog</h1>
                 {products != null
                 ?
-                    products.map((product, index) => (
-                        <Product key={index}
+                    products.map((product) => (
+                        <Product
+                            key={product.Id}
+                            id={product.Id}
                             name={product.Name}
                             price={product.Price}
                             list={orderItems}

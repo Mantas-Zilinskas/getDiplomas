@@ -1,7 +1,7 @@
 import "../styles/OrderCreationSidePanelStyle.css"
 import React, { useEffect, useState } from "react";
 import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
-import { useNavigate } from 'react-router-dom';
+import { createOrder } from '../api/OrderApi'
 
 function OrderCreationSidePanel({ items, setItems}) {
 
@@ -16,6 +16,17 @@ function OrderCreationSidePanel({ items, setItems}) {
     }, [items]);
 
     const HandleSubmit = () => {
+        if (items.length == 0) return
+
+        let order = {
+            UserId: 0,
+            Products: items.map(({ id, amount }) => ({ProductId:id, Quantity:amount})),
+            Tip: 0,
+            DiscountId: 0,
+            ReservationId: 0,
+        }
+        createOrder(order);
+
         setTotal(0);
         setItems([]);
         return;

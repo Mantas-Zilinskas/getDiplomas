@@ -1,14 +1,14 @@
 import "../styles/ProductStyle.css";
 import React, { useRef } from "react";
 
-function Product({name, price, list, setList}) {
+function Product({name, price, id, list, setList}) {
 
     const inputRef = useRef();
 
     const Submit = () => {
         if (inputRef.current.value == 0) return;
         let amount = inputRef.current.value;
-        setList([...list, { name, price, amount }]);
+        setList([...list, {name, price, id, amount }]);
         inputRef.current.value = 0;
     }
 
