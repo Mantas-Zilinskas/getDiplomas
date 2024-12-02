@@ -1,6 +1,11 @@
-.container {
+.headers {
+    margin-top: 0;
+    top: 0;
     background-color: #fef7ff;
     color: #1d1b20;
     padding: 10px;
+    height: 76px;
     margin-left: 100px;
+    position: fixed;
+    width: 100%;
 }
