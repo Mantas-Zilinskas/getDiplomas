@@ -1,7 +1,7 @@
 import SideBar from '../components/SideBar'
 import Header from '../components/Header'
 import Product from '../components/Product'
-import {useEffect, useState} from 'React'
+import {useEffect, useState} from 'react'
 import { getProducts } from '../api/ProductsApi'
 import OrderCreationSidePanel from '../components/OrderCreationSidePanel'
 
