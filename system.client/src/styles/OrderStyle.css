@@ -1,0 +1,19 @@
+.orderBox {
+    display: inline-block;
+    padding: 20px;
+    margin: 5px;
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+    min-width: 200px;
+}
+
+.orderBox .inline {
+    display: inline-block;
+}
+
+.orderBox .inline-right {
+    display: inline-block;
+    float: right;
+    margin-left: 10px;
+}

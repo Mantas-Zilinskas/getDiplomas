@@ -1,0 +1,35 @@
+.sidenav {
+    place-items: center;
+    height: 100%;
+    width: 100px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-Color: #fef7ff;
+    overflow-x: hidden;
+    padding-top: 20px;
+    text-align: center;
+}
+.sidenav div {
+    padding: 0px 8px 15px 8px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #49454f;
+    display: block;
+    border-radius: 15%;
+}
+.active {
+    background-color: #f1f1f1;
+    color: #735884;
+}
+.sidenav p{
+    margin: -15px;
+    padding: 0px;
+    display: block;
+}
+.sidenav div:hover {
+    background-color: #f1f1f1;
+    color: #735884;
+}

@@ -1,0 +1,32 @@
+.orderCreationContainer {
+    position: fixed;
+    padding-left: 20px;
+    padding-right: 30px;
+    height: calc(100% - 97px);
+    width: 200px;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    background-Color: #fef7ff;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    margin-top: 97px;
+    color: black;
+}
+.orderCreationContainer h2{
+    margin-top: 5px;   
+}
+.orderCreationContainer .inline {
+    display: inline-block;
+}
+.orderCreationContainer .inline-right {
+    display: inline-block;
+    float:right
+}
+.orderCreationContainer .totalWindow{
+    margin-left: -20px;
+    margin-right: -30px;
+    text-align:center;
+    font-size: 20px;
+    margin-bottom: 20px
+}

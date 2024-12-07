@@ -1,0 +1,21 @@
+.main-box {
+    display:inline-block;
+    padding: 20px;
+    margin: 5px;
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+}
+.center {
+text-align:center;
+}
+.right {
+margin-left: 10px;
+margin-right: 0px;
+}
+.number-input {
+    height:25px;
+    width: 50%;
+    max-width: 200px;
+    font-size: 14px;
+}
