@@ -5,9 +5,10 @@ namespace System.Server.IServices
     public interface IOrderService
     {
         Task<IEnumerable<Order>> GetAllOrders();
-        Task AddOrder(Order order);
-        Task UpdateOrder(Order order);  
-        Task RemoveOrder(Order order);
+        Task<Order> GetOrderById(long id);
+        Task CreateOrder(Order order);
+        Task UpdateOrder(long orderId, Order order);  
+        Task DeleteOrder(long id);
 
     }
 }

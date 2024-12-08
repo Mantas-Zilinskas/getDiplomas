@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 using System.Server.IServices;
 using System.Server.Models;
 using System.Server.Models.DTO;
@@ -18,43 +20,53 @@ namespace System.Server.Controllers
             _orderService = orderService;
         }
 
-
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Order order)
-        {
-            if (order == null)
-            { return BadRequest(); }
-
-            await _orderService.AddOrder(order);
-            return Ok();
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var orders = await _orderService.GetAllOrders();
             return Ok(orders);
         }
-
-        /*[HttpPut("{orderId}")]
-        public IActionResult Put(int orderId, [FromBody] OrderUpdateDTO order)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Order order)
         {
-            Console.WriteLine(orderId);
-            Console.WriteLine(JsonSerializer.Serialize(order));
-            /////////////////////////////////////////////////////////////////
+            if (order == null)
+            {
+                return BadRequest(); 
+            }
 
+            await _orderService.CreateOrder(order);
+            return Ok();
+        }
+        [HttpGet("{orderId}")]
+        public async Task<IActionResult> GetById(long orderId)
+        {
+            var order = await _orderService.GetOrderById(orderId);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return Ok(order);
+        }
+        [HttpPut("{orderId}")]
+        public async Task<IActionResult> Put(long orderId, [FromBody] Order order)
+        {
+            await _orderService.UpdateOrder(orderId, order);
             return Ok();
         }
 
         [HttpDelete("{orderId}")]
-        public IActionResult Delete(int orderId)
+        public async Task<IActionResult> Delete(long orderId)
         {
-            Console.WriteLine(orderId);
-            /////////////////////////////////////////////////////////////////
+            var existingOrder = await _orderService.GetOrderById(orderId);
+            if (existingOrder == null)
+            {
+                return NotFound();
+            }
 
+            await _orderService.DeleteOrder(orderId);
             return Ok();
         }
-
+        /*
         [HttpPost("{orderId}/Pay")]
         public IActionResult Post(int orderId, [FromBody] PaymentResponseDTO payment)
         {
