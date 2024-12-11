@@ -32,9 +32,6 @@ export function CatalogLayout() {
                             setList={setOrderItems} />))
                 :
                     (<h2>Loading Please wait</h2>)}
-
-                <button onClick={()=> console.log(products)}>check</button>
-
             </div>
         </>
     );
