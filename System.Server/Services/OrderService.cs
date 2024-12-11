@@ -17,18 +17,53 @@ namespace System.Server.Services
             _context = context; 
         }
 
-        public async Task<IEnumerable<Order>> GetAllOrders()
+        public async Task<IEnumerable<OrderGetDTO>> GetAllOrders()
         {
-            return await _context.Orders.ToListAsync();
+            var orders = await _context.Orders.ToListAsync();
+            var orderList = new List<OrderGetDTO>();
+            var n = orders.Count;
+            for (int i = 0; i < n; i++)
+            {
+                orderList.Add(await GetOrderById(orders[i].Id));
+            }
+            return orderList;
         }
-        public async Task<Order> GetOrderById(long id)
+        public async Task<OrderGetDTO> GetOrderById(long id)
         {
             var order =  await _context.Orders.FindAsync(id);
-            if (order != null)
-            { 
-                return order;
+            if (order == null)
+            {
+                throw new KeyNotFoundException($"Order with ID {id} not found.");
             }
-            throw new KeyNotFoundException($"Order with ID {id} not found.");
+            var newOrder = new OrderGetDTO
+            {
+                Id = order.Id,
+                Status = order.Status,
+                Tip = order.Tip,
+                ReservationId = order.ReservationId,
+                Payments = null
+            };
+            var orderProducts = await _context.OrderProducts
+                .Where(p => p.OrderId == order.Id)
+                .ToListAsync();
+            var newProducts = new List<OrderGetProductDTO>();
+            var n = orderProducts.Count;
+            for (int i = 0; i < n; i++)
+            {
+                var product = await _context.Products
+                    .FindAsync(orderProducts[i].ProductId);
+                newProducts.Add(new OrderGetProductDTO
+                { 
+                    Id = product.Id,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Quantity = orderProducts[i].Quantity,
+                    DiscountId = product.DiscountId
+                });
+            }
+            newOrder.Products = newProducts;
+
+            return newOrder;
         }
         public async Task CreateOrder(OrderPostDTO order)
         {
