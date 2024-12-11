@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Server.IServices;
 using System.Server.Models;
 using System.Server.Models.DTO;
+using System.Server.Services;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -66,17 +67,12 @@ namespace System.Server.Controllers
             await _orderService.DeleteOrder(orderId);
             return Ok();
         }
-        /*
         [HttpPost("{orderId}/Pay")]
-        public IActionResult Post(int orderId, [FromBody] PaymentResponseDTO payment)
+        public async Task<IActionResult> Post(int orderId, [FromBody] PaymentResponseDTO payment)
         {
-            Console.WriteLine(orderId);
-            Console.WriteLine(JsonSerializer.Serialize(payment));
-            /////////////////////////////////////////////////////////////////
-            var obj = new PaymentDTO();
-            string returnable = JsonSerializer.Serialize(obj);
+            await _orderService.PayForOrder(orderId, payment);
 
-            return Ok(returnable);
-        }*/
+            return Ok();
+        }
     }
 }

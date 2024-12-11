@@ -10,6 +10,8 @@ namespace System.Server.IServices
         Task CreateOrder(OrderPostDTO order);
         Task UpdateOrder(long orderId, Order order);  
         Task DeleteOrder(long id);
+        Task PayForOrder(long id, PaymentResponseDTO payment);
+        decimal CalculateOrderPrice(List<OrderGetProductDTO> products);
 
     }
 }

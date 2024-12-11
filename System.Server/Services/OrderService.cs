@@ -116,5 +116,26 @@ namespace System.Server.Services
             }
             
         }
+        public async Task PayForOrder(long id, PaymentResponseDTO payment)
+        {
+            var order =  await GetOrderById(id);
+            var orderPrice = CalculateOrderPrice(order.Products);
+            if (payment.Amount == orderPrice)
+            { 
+                var paymentOrder = await _context.Orders.FindAsync(order.Id);
+                paymentOrder.Status = OrderStatus.Closed;
+            }
+            await _context.SaveChangesAsync();
+        }
+        public decimal CalculateOrderPrice(List<OrderGetProductDTO> products)
+        {
+            decimal sum = 0;
+            var n = products.Count;
+            for (int i = 0; i < n; i++)
+            { 
+                sum += products[i].Price;
+            }
+            return sum;
+        }
     }
 }
