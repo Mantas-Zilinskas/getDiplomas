@@ -36,39 +36,23 @@ namespace System.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Product product)
+        public async Task<IActionResult> Post([FromBody] ProductDTO product)
         {
             if (product == null)
             {
                 return BadRequest();
             }
 
-            await _productService.AddProduct(product);
+            await _productService.CreateProduct(product);
             return Ok();
            
         }
 
         [HttpPut("{productId}")]
-        public async Task<IActionResult> Put(long productId, [FromBody] ProductDTO productDto)
+        public async Task<IActionResult> Put(long productId, [FromBody] ProductDTO product)
         {
-            if (productDto == null || productId != productDto.Id)
-            {
-                return BadRequest(new { Message = "Invalid product data or mismatched ID." });
-            }
-
-            var existingProduct = await _productService.GetProductById(productId);
-            if (existingProduct == null)
-            {
-                return NotFound(new { Message = $"Product with ID {productId} not found." });
-            }
-
-            existingProduct.Name = productDto.Name;
-            existingProduct.Price = productDto.Price;
-            existingProduct.Quantity = productDto.Quantity;
-
-            await _productService.UpdateProduct(existingProduct);
-
-            return Ok(new { Message = $"Product with ID {productId} updated successfully." });
+            await _productService.UpdateProduct(productId, product);
+            return Ok(product);
         }
 
         [HttpDelete("{productId}")]
