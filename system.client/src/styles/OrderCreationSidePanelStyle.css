@@ -30,3 +30,10 @@
     font-size: 20px;
     margin-bottom: 20px
 }
+.orderCreationContainer .closeIcon {
+    border-radius: 5px;
+    margin-left: 2px;
+}
+.orderCreationContainer .closeIcon:hover{
+    background-color: grey;
+}

@@ -2,6 +2,7 @@ import "../styles/OrderCreationSidePanelStyle.css"
 import React, { useEffect, useState } from "react";
 import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
 import { createOrder } from '../api/OrderApi'
+import CloseIcon from '@mui/icons-material/Close';
 
 function OrderCreationSidePanel({ items, setItems}) {
 
@@ -15,12 +16,11 @@ function OrderCreationSidePanel({ items, setItems}) {
         setTotal(items.reduce((sum, item) => sum + (item.price * 100 * item.amount), 0));
     }, [items]);
 
-    const HandleClear = () => {
-        setItems([]);
+    const removeItem = (id, amount) => {
+        setItems(items.filter((product) => !(product.amount == amount && product.id == id)));
     }
 
-
-    const HandleSubmit = () => {
+    const handleSubmit = () => {
         if (items.length == 0) return
 
         let order = {
@@ -41,19 +41,19 @@ function OrderCreationSidePanel({ items, setItems}) {
         <>
             <div className="orderCreationContainer">
                 <h2>Order Details</h2>
-                <button onClick={HandleClear}>Clear</button>
                 {items.map((product, index) => (
                 <div>
                     <div>{product.name}</div>
                     <div className="itemDetails">
                         <div className="inline">x{product.amount}</div>
+                            <CloseIcon className="inline-right closeIcon" onClick={() => { removeItem(product.id, product.amount) }} />
                         <div className="inline-right">{product.price} eur</div>
                     </div>
                     <hr/>
                 </div>))}
                 <div className="totalWindow">
                     Total: {total/100} eur
-                    <button onClick={HandleSubmit}>Create Order</button>
+                    <button onClick={handleSubmit}>Create Order</button>
                 </div>
             </div>
         </>
