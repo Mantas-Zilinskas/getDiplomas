@@ -27,7 +27,7 @@ namespace System.Server.Controllers
             return Ok(orders);
         }
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Order order)
+        public async Task<IActionResult> Post([FromBody] OrderPostDTO order)
         {
             if (order == null)
             {

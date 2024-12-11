@@ -1,4 +1,5 @@
 ﻿using System.Server.Models;
+using System.Server.Models.DTO;
 
 namespace System.Server.IServices
 {
@@ -6,7 +7,7 @@ namespace System.Server.IServices
     {
         Task<IEnumerable<Order>> GetAllOrders();
         Task<Order> GetOrderById(long id);
-        Task CreateOrder(Order order);
+        Task CreateOrder(OrderPostDTO order);
         Task UpdateOrder(long orderId, Order order);  
         Task DeleteOrder(long id);
 

@@ -1,6 +1,8 @@
 ﻿using System.Server.Data;
 using System.Server.IServices;
 using System.Server.Models;
+using System.Server.Models.DTO;
+using System.Server.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
@@ -21,14 +23,40 @@ namespace System.Server.Services
         }
         public async Task<Order> GetOrderById(long id)
         {
-            return await _context.Orders.FindAsync(id);
+            var order =  await _context.Orders.FindAsync(id);
+            if (order != null)
+            { 
+                return order;
+            }
+            throw new KeyNotFoundException($"Order with ID {id} not found.");
         }
-        public async Task CreateOrder(Order order)
+        public async Task CreateOrder(OrderPostDTO order)
         {
-            _context.Orders.Add(order);
+            var newOrder = new Order
+            {
+                UserId = order.UserId,
+                DiscountId = order.DiscountId,
+                ReservationId = order.ReservationId,
+                Tip = order.Tip,
+                Status = OrderStatus.Open
+            };
+            _context.Orders.Add(newOrder);
+            await _context.SaveChangesAsync();
+
+            var n = order.Products.Count;
+            for (int i = 0; i < n; i++)
+            {
+                var orderProduct = new OrderProduct
+                {
+                    OrderId = newOrder.Id,
+                    ProductId = order.Products[i].ProductId,
+                    Quantity = order.Products[i].Quantity
+                };
+                _context.OrderProducts.Add(orderProduct);
+            }
             await _context.SaveChangesAsync();
         }
-
+        
         public async Task UpdateOrder(long id, Order order)
         {
             var existingOrder = await _context.Orders.FindAsync(id);
