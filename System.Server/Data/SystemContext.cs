@@ -44,10 +44,6 @@ namespace System.Server.Data
             modelBuilder.Entity<Tax>()
                 .Property(t => t.Value)
                 .HasPrecision(10, 2);
-
-            modelBuilder.Entity<OrderProduct>()
-                .Property(op => op.Price)
-                .HasPrecision(10, 2);
             
             modelBuilder.Entity<Service>()
                 .Property(s => s.Charge)
