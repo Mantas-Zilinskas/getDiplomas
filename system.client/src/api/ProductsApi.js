@@ -1,11 +1,10 @@
-export const getProducts = (object) => {
+export const getProducts = async () => {
 
-    fetch('https://localhost:7089/api/Products', {
+    return fetch('https://localhost:7089/api/Products', {
         method: 'Get',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(object) // Convert JavaScript object to JSON string
     }).then(response => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
@@ -13,6 +12,7 @@ export const getProducts = (object) => {
         return response.json(); // Parse the JSON response
     }).then(data => {
         console.log("Received response:", data); // Log the array of strings received back
+        return data
     }).catch(error => {
         console.error("There was a problem with the fetch operation:", error);
     })
