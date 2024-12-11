@@ -28,6 +28,19 @@ namespace System.Server.Services
             }
             return orderList;
         }
+        public async Task<IEnumerable<OrderGetDTO>> GetAllUnpaidOrders()
+        {
+            var orders = await _context.Orders
+                .Where(o => o.Status == OrderStatus.Open)
+                .ToListAsync();
+            var orderList = new List<OrderGetDTO>();
+            var n = orders.Count;
+            for (int i = 0; i < n; i++)
+            {
+                orderList.Add(await GetOrderById(orders[i].Id));
+            }
+            return orderList;
+        }
         public async Task<OrderGetDTO> GetOrderById(long id)
         {
             var order =  await _context.Orders.FindAsync(id);
@@ -40,9 +53,10 @@ namespace System.Server.Services
                 Id = order.Id,
                 Status = order.Status,
                 Tip = order.Tip,
-                ReservationId = order.ReservationId,
-                Payments = null
+                ReservationId = order.ReservationId
             };
+
+            // Find order Products
             var orderProducts = await _context.OrderProducts
                 .Where(p => p.OrderId == order.Id)
                 .ToListAsync();
@@ -61,7 +75,27 @@ namespace System.Server.Services
                     DiscountId = product.DiscountId
                 });
             }
+
+            // Find order Payments
+            var orderPayments = await _context.Payments
+                .Where(p => p.OrderId == order.Id)
+                .ToListAsync();
+            var newPayments = new List<PaymentDTO>();
+            n = orderPayments.Count;
+            for (int i = 0; i < n; i++)
+            {
+                var payment = await _context.Payments
+                    .FindAsync(orderPayments[i].Id);
+                newPayments.Add(new PaymentDTO
+                { 
+                    Id = payment.Id,
+                    Amount = payment.Amount,
+                    Method = payment.Method,
+                });
+            }
+
             newOrder.Products = newProducts;
+            newOrder.Payments = newPayments;
 
             return newOrder;
         }
@@ -92,18 +126,11 @@ namespace System.Server.Services
             await _context.SaveChangesAsync();
         }
         
-        public async Task UpdateOrder(long id, Order order)
+        public async Task UpdateOrder(long id, OrderUpdateDTO order)
         {
-            var existingOrder = await _context.Orders.FindAsync(id);
-            if (existingOrder != null)
-            {
-                existingOrder.UserId = order.UserId;
-                existingOrder.DiscountId = order.DiscountId;
-                existingOrder.ReservationId = order.ReservationId;
-                existingOrder.Tip = order.Tip;
-                existingOrder.Status = order.Status;
-            }
+            //todo
             await _context.SaveChangesAsync();
+            
         }
 
         public async Task DeleteOrder(long id)
@@ -124,6 +151,12 @@ namespace System.Server.Services
             { 
                 var paymentOrder = await _context.Orders.FindAsync(order.Id);
                 paymentOrder.Status = OrderStatus.Closed;
+                _context.Payments.Add(new Payment
+                { 
+                    OrderId = order.Id,
+                    Amount = payment.Amount,
+                    Method = payment.Method
+                });
             }
             await _context.SaveChangesAsync();
         }

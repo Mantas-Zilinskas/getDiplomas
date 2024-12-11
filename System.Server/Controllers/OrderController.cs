@@ -20,11 +20,16 @@ namespace System.Server.Controllers
         {
             _orderService = orderService;
         }
-
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var orders = await _orderService.GetAllOrders();
+            return Ok(orders);
+        }
+        [HttpGet("Unpaid")]
+        public async Task<IActionResult> GetAllUnpaid()
+        {
+            var orders = await _orderService.GetAllUnpaidOrders();
             return Ok(orders);
         }
         [HttpPost]
@@ -49,7 +54,7 @@ namespace System.Server.Controllers
             return Ok(order);
         }
         [HttpPut("{orderId}")]
-        public async Task<IActionResult> Put(long orderId, [FromBody] Order order)
+        public async Task<IActionResult> Put(long orderId, [FromBody] OrderUpdateDTO order)
         {
             await _orderService.UpdateOrder(orderId, order);
             return Ok();
