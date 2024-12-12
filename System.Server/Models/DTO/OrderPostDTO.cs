@@ -2,10 +2,10 @@
 
 namespace System.Server.Models.DTO
 {
-    public class OrderResponseDTO
+    public class OrderPostDTO
     {
         public int UserId { get; set; }
-        public List<ProductOrder> Products { get; set; }
+        public List<OrderPostProductDTO> Products { get; set; }
         public decimal Tip { get; set; }
         public int DiscountId { get; set; }
         public int ReservationId { get; set; }

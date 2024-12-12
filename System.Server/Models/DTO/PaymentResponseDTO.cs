@@ -4,7 +4,7 @@ namespace System.Server.Models.DTO
 {
     public class PaymentResponseDTO
 {
-        public Decimal Amount { get; set; }
+        public decimal Amount { get; set; }
         public PaymentMethod Method { get; set; }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Server.IServices;
+using System.Server.Models;
 using System.Server.Models.DTO;
 using System.Text.Json;
 
@@ -8,58 +10,62 @@ namespace System.Server.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
-        {
-            /////////////////////////////////////////////////////////////////
-            List<ProductDTO> list = new List<ProductDTO>();
-            list.Add(new ProductDTO());
-            list.Add(new ProductDTO());
-            list.Add(new ProductDTO());
-            string returnable = JsonSerializer.Serialize(list);
+        private readonly IProductService _productService;
 
-            return Ok(returnable);
+        public ProductsController(IProductService productService)
+        {
+            _productService = productService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var products = await _productService.GetAllProducts();
+            return Ok(products);
         }
 
         [HttpGet("{productId}")]
-        public IActionResult Get(int productId)
-        {
-            Console.WriteLine(productId);
-            /////////////////////////////////////////////////////////////////
-            var product = new ProductDTO();
-            string returnable = JsonSerializer.Serialize(product);
-
-            return Ok(returnable);
+        public async Task<IActionResult> GetById(long productId)
+        { 
+            var product = await _productService.GetProductById(productId);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return Ok(product);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] ProductDTO product)
+        public async Task<IActionResult> Post([FromBody] ProductDTO product)
         {
-            string obj = JsonSerializer.Serialize(product);
-            Console.WriteLine(obj);
-            /////////////////////////////////////////////////////////////////
+            if (product == null)
+            {
+                return BadRequest();
+            }
 
-            return Ok(obj);
+            await _productService.CreateProduct(product);
+            return Ok();
+           
         }
 
         [HttpPut("{productId}")]
-        public IActionResult Put(int productId,[FromBody] ProductDTO product)
+        public async Task<IActionResult> Put(long productId, [FromBody] ProductDTO product)
         {
-            string obj = JsonSerializer.Serialize(product);
-            Console.WriteLine(productId);
-            Console.WriteLine(obj);
-            /////////////////////////////////////////////////////////////////
-
-            return Ok(obj);
+            await _productService.UpdateProduct(productId, product);
+            return Ok(product);
         }
 
         [HttpDelete("{productId}")]
-        public IActionResult Delete(int productId)
+        public async Task<IActionResult> Delete(long productId)
         {
-            Console.WriteLine(productId);
-            /////////////////////////////////////////////////////////////////
+            var product = await _productService.GetProductById(productId);
+            if (product == null)
+            {
+                return NotFound(new { Message = $"Product with ID {productId} not found." });
+            }
 
-            return Ok();
+            await _productService.DeleteProduct(productId);
+            return Ok(new { Message = $"Product with ID {productId} deleted successfully." });
         }
     }
 }
