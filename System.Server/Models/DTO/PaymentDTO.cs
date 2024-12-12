@@ -5,8 +5,8 @@ namespace System.Server.Models.DTO
 {
     public class PaymentDTO
     {
-        public int Id {  get; set; }
-        public Decimal Amount { get; set; }
+        public long Id {  get; set; }
+        public decimal Amount { get; set; }
         public PaymentMethod Method { get; set; }
     }
 }

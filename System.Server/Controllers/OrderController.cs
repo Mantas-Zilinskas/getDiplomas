@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
+using System.Server.IServices;
 using System.Server.Models;
 using System.Server.Models.DTO;
+using System.Server.Services;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -10,57 +14,70 @@ namespace System.Server.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
+        private readonly IOrderService _orderService;
+
+        public OrderController(IOrderService orderService)
+        {
+            _orderService = orderService;
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var orders = await _orderService.GetAllOrders();
+            return Ok(orders);
+        }
+        [HttpGet("Unpaid")]
+        public async Task<IActionResult> GetAllUnpaid()
+        {
+            var orders = await _orderService.GetAllUnpaidOrders();
+            return Ok(orders);
+        }
         [HttpPost]
-        public IActionResult Post([FromBody] OrderResponseDTO order)
+        public async Task<IActionResult> Post([FromBody] OrderPostDTO order)
         {
-            Console.WriteLine(JsonSerializer.Serialize(order));
-            /////////////////////////////////////////////////////////////////
-            var obj = new OrderDTO();
-            string returnable = JsonSerializer.Serialize(obj);
+            if (order == null)
+            {
+                return BadRequest(); 
+            }
 
-            return Ok(returnable);
+            await _orderService.CreateOrder(order);
+            return Ok();
         }
-
         [HttpGet("{orderId}")]
-        public IActionResult Get(int orderId)
+        public async Task<IActionResult> GetById(long orderId)
         {
-            Console.WriteLine(orderId);
-            /////////////////////////////////////////////////////////////////
-            var obj = new OrderDTO();
-            string returnable = JsonSerializer.Serialize(obj);
-
-            return Ok(returnable);
+            var order = await _orderService.GetOrderById(orderId);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return Ok(order);
         }
-
         [HttpPut("{orderId}")]
-        public IActionResult Put(int orderId, [FromBody] OrderUpdateDTO order)
+        public async Task<IActionResult> Put(long orderId, [FromBody] OrderUpdateDTO order)
         {
-            Console.WriteLine(orderId);
-            Console.WriteLine(JsonSerializer.Serialize(order));
-            /////////////////////////////////////////////////////////////////
-
+            await _orderService.UpdateOrder(orderId, order);
             return Ok();
         }
 
         [HttpDelete("{orderId}")]
-        public IActionResult Delete(int orderId)
+        public async Task<IActionResult> Delete(long orderId)
         {
-            Console.WriteLine(orderId);
-            /////////////////////////////////////////////////////////////////
+            var existingOrder = await _orderService.GetOrderById(orderId);
+            if (existingOrder == null)
+            {
+                return NotFound();
+            }
 
+            await _orderService.DeleteOrder(orderId);
             return Ok();
         }
-
         [HttpPost("{orderId}/Pay")]
-        public IActionResult Post(int orderId, [FromBody] PaymentResponseDTO payment)
+        public async Task<IActionResult> Post(int orderId, [FromBody] PaymentResponseDTO payment)
         {
-            Console.WriteLine(orderId);
-            Console.WriteLine(JsonSerializer.Serialize(payment));
-            /////////////////////////////////////////////////////////////////
-            var obj = new PaymentDTO();
-            string returnable = JsonSerializer.Serialize(obj);
+            await _orderService.PayForOrder(orderId, payment);
 
-            return Ok(returnable);
+            return Ok();
         }
     }
 }

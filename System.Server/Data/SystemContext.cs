@@ -16,12 +16,17 @@ namespace System.Server.Data
         public DbSet<Reservation> Reservations { get; set; } = null!;
         public DbSet<Service> Services { get; set; } = null!;
 
+        public SystemContext(DbContextOptions<SystemContext> options)
+            : base(options)
+        {
+        }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SystemDatabase;Integrated Security=True;");
         }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>()
@@ -38,10 +43,6 @@ namespace System.Server.Data
 
             modelBuilder.Entity<Tax>()
                 .Property(t => t.Value)
-                .HasPrecision(10, 2);
-
-            modelBuilder.Entity<OrderProduct>()
-                .Property(op => op.Price)
                 .HasPrecision(10, 2);
             
             modelBuilder.Entity<Service>()
