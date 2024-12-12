@@ -1,9 +1,10 @@
 import Modal from "react-modal";
 import { useState } from "react";
 import { useRef } from "react";
+import { getProducts } from "../../api/ProductsApi";
 import "../../styles/modalStyles/CreateProductModalStyle.css";
 
-function CreateProductModal({ modalIsOpen, setModalIsOpen }) {
+function CreateProductModal({ modalIsOpen, setModalIsOpen, products, setProducts, apiMethod, id}) {
     const [nameError, setNameError] = useState(false);
     const [priceError, setPriceError] = useState(false);
     const nameRef = useRef(null);
@@ -34,13 +35,18 @@ function CreateProductModal({ modalIsOpen, setModalIsOpen }) {
         return flag;
     }
 
-    const submit = () => {
+    const submit = async () => {
 
         if (validate()) return;
+        const response = await apiMethod(id, nameRef.current.value, Number(priceRef.current.value));
         setNameError(false);
         setPriceError(false);
 
-        // add api integration
+        if (!response.ok) {
+            allert("Something went wrong while creating new catalog item.");
+        } else {
+            getProducts().then((data) => setProducts(data));
+        }
     }
 
   return (
