@@ -1,0 +1,36 @@
+.addProductBox {
+    padding: 20px;
+    margin: 5px;
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+    width: 200px;
+    height: 125px;
+    display: flex;
+    place-items: center;
+    font-size: 30px;
+}
+.addProductBox:hover {
+    background-color:grey;
+}
+.addProductBox:active {
+    background-color: darkgray;
+}
+
+.addProductBox .circle {
+    border-radius: 50%;
+    background-color: lightgray;
+    height: 50%;
+    aspect-ratio: 1;
+    padding: 0px;
+}
+.addProductBox .plus {
+    font-size: 50px;
+    padding: 0;
+    margin: 25%;
+    border-radius: 50%;
+    background-color: lightgray;
+    height: 50%;
+    aspect-ratio: 1;
+    padding: 0px;
+}

@@ -4,6 +4,7 @@ import Product from '../components/Product'
 import {useEffect, useState} from 'react'
 import { getProducts } from '../api/ProductsApi'
 import OrderCreationSidePanel from '../components/OrderCreationSidePanel'
+import AddProduct from '../components/AddProduct'
 
 export function CatalogLayout() {
     const [products, setProducts] = useState(null)
@@ -32,6 +33,10 @@ export function CatalogLayout() {
                             setList={setOrderItems} />))
                 :
                     (<h2>Loading Please wait</h2>)}
+                {products != null
+                ?
+                    <AddProduct/>
+                :(null)}
             </div>
         </>
     );
