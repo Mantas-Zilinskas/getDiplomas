@@ -9,7 +9,7 @@ export const getProducts = async () => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
         }
-        return response.json(); // Parse the JSON response
+        return response.json();
     }).then(data => {
         console.log("Received response:", data); // Log the array of strings received back
         return data
@@ -18,9 +18,15 @@ export const getProducts = async () => {
     })
 }
 
-export const createProduct = (object) => {
+export const createProduct = async (name, price) => {
 
-    fetch('https://localhost:7089/api/Products', {
+    let object = {
+        name: name,
+        price: price,
+        discountId: 0
+    }
+
+    return fetch('https://localhost:7089/api/Products', {
         method: 'Post',
         headers: {
             'Content-Type': 'application/json',
@@ -30,9 +36,7 @@ export const createProduct = (object) => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
         }
-        return response.json(); // Parse the JSON response
-    }).then(data => {
-        console.log("Received response:", data); // Log the array of strings received back
+        return response;
     }).catch(error => {
         console.error("There was a problem with the fetch operation:", error);
     })
@@ -77,9 +81,9 @@ export const updateProduct = (id, object) => {
     })
 }
 
-export const deleteProduct = (id) => {
+export const deleteProduct = async (id) => {
 
-    fetch('https://localhost:7089/api/Products/' + id, {
+    return fetch('https://localhost:7089/api/Products/' + id, {
         method: 'Delete',
         headers: {
             'Content-Type': 'application/json',

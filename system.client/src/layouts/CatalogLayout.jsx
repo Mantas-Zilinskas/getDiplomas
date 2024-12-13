@@ -4,13 +4,14 @@ import Product from '../components/Product'
 import {useEffect, useState} from 'react'
 import { getProducts } from '../api/ProductsApi'
 import OrderCreationSidePanel from '../components/OrderCreationSidePanel'
+import AddProduct from '../components/AddProduct'
 
 export function CatalogLayout() {
     const [products, setProducts] = useState(null)
     const [orderItems, setOrderItems] = useState([])
 
     useEffect(() => {
-        getProducts().then((data)=>setProducts(data));
+        let response = getProducts().then((data) => setProducts(data));
     }, []);
 
     return (
@@ -24,17 +25,20 @@ export function CatalogLayout() {
                 ?
                     products.map((product) => (
                         <Product
-                            key={product.Id}
-                            id={product.Id}
-                            name={product.Name}
-                            price={product.Price}
+                            key={product.id}
+                            id={product.id}
+                            name={product.name}
+                            price={product.price}
                             list={orderItems}
-                            setList={setOrderItems} />))
+                            setList={setOrderItems}
+                            products={products}
+                            setProducts={setProducts}/>))
                 :
                     (<h2>Loading Please wait</h2>)}
-
-                <button onClick={()=> console.log(products)}>check</button>
-
+                {products != null
+                ?
+                    <AddProduct products={products} setProducts={setProducts} />
+                :(null)}
             </div>
         </>
     );

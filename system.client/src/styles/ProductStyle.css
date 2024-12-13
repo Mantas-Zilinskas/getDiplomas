@@ -1,4 +1,4 @@
-.main-box {
+.productBox {
     display:inline-block;
     padding: 20px;
     margin: 5px;
@@ -6,16 +6,31 @@
     background-color: white;
     border-radius: 20px;
 }
-.center {
-text-align:center;
+.productBox .center {
+    text-align: center;
 }
-.right {
-margin-left: 10px;
-margin-right: 0px;
+.productBox .right {
+    margin-left: 10px;
+    margin-right: 0px;
 }
-.number-input {
-    height:25px;
+.productBox .number-input {
+    height: 25px;
     width: 50%;
     max-width: 200px;
     font-size: 14px;
+}
+.productBox .inline-right {
+    display: inline;
+    float: right;
+}
+.productBox .closeIcon {
+    border-radius: 5px;
+    margin-left: 2px;
+}
+.productBox .hover{
+    border-radius: 5px;
+    margin-left: 2px;
+}
+.productBox .closeIcon:hover {
+    background-color: grey;
 }

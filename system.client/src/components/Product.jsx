@@ -1,9 +1,21 @@
 import "../styles/ProductStyle.css";
 import React, { useRef } from "react";
+import CloseIcon from '@mui/icons-material/Close';
+import { deleteProduct } from "../api/ProductsApi";
 
-function Product({name, price, id, list, setList}) {
+function Product({name, price, id, list, setList, products, setProducts}) {
 
     const inputRef = useRef();
+
+    const deleteItem = async () => {
+        const response = await deleteProduct(id);
+        if (!response.ok) {
+            alert("something went wrong while trying to delete catalog item");
+        } else {
+            const newList = products.filter(product => product.id != id )
+            setProducts(newList);
+        }
+    }
 
     const Submit = () => {
         if (inputRef.current.value == 0) return;
@@ -22,7 +34,8 @@ function Product({name, price, id, list, setList}) {
 
     return (
         <>
-            <div className="main-box">
+            <div className="productBox">
+                <CloseIcon className="inline-right closeIcon" onClick={deleteItem} />
                 <div className="center">{name}</div>
                 <p>Price:  {price} Eur</p>
                 <input type="number"
