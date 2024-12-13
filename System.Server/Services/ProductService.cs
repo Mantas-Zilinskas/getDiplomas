@@ -38,7 +38,8 @@ namespace System.Server.Services
             {
                 Name = product.Name,
                 Price = product.Price,
-                DiscountId = product.DiscountId
+                DiscountId = product.DiscountId,
+                IsDeleted = false
             };
             _context.Products.Add(newProduct);
             await _context.SaveChangesAsync();
@@ -52,15 +53,17 @@ namespace System.Server.Services
                 existingProduct.Name = product.Name;
                 existingProduct.Price = product.Price;
                 existingProduct.DiscountId = product.DiscountId;
+
+                await _context.SaveChangesAsync();
             }
-            await _context.SaveChangesAsync();
         }
         public async Task DeleteProduct(long id)
         {
             var product = await _context.Products.FindAsync(id);
             if (product != null)
             {
-                _context.Products.Remove(product);
+                //_context.Products.Remove(product);
+                product.IsDeleted = true;
                 await _context.SaveChangesAsync();
             }
         }
