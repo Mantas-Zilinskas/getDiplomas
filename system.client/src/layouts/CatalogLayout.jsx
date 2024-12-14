@@ -1,17 +1,18 @@
 import SideBar from '../components/SideBar'
 import Header from '../components/Header'
 import Product from '../components/Product'
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useContext} from 'react'
 import { getProducts } from '../api/ProductsApi'
 import OrderCreationSidePanel from '../components/OrderCreationSidePanel'
 import AddProduct from '../components/AddProduct'
+import {ProductContext} from '../App'
 
 export function CatalogLayout() {
-    const [products, setProducts] = useState(null)
-    const [orderItems, setOrderItems] = useState([])
+    const { products, setProducts } = useContext(ProductContext);
+    const [orderItems, setOrderItems] = useState([]);
 
     useEffect(() => {
-        let response = getProducts().then((data) => setProducts(data));
+        getProducts().then((data) => setProducts(data));
     }, []);
 
     return (
@@ -30,14 +31,13 @@ export function CatalogLayout() {
                             name={product.name}
                             price={product.price}
                             list={orderItems}
-                            setList={setOrderItems}
-                            products={products}
-                            setProducts={setProducts}/>))
+                            setList={setOrderItems} />
+                    ))
                 :
                     (<h2>Loading Please wait</h2>)}
                 {products != null
                 ?
-                    <AddProduct products={products} setProducts={setProducts} />
+                    <AddProduct/>
                 :(null)}
             </div>
         </>

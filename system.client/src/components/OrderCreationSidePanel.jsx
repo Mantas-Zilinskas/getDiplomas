@@ -13,7 +13,7 @@ function OrderCreationSidePanel({ items, setItems}) {
         for (let i = 0; i < items.length; ++i) {
             c += items 
         }
-        setTotal(items.reduce((sum, item) => sum + (item.price * 100 * item.amount), 0));
+        setTotal(items.reduce((sum, item) => sum + (parseInt(item.price.toString().replace(/\./, '')) * item.amount), 0));
     }, [items]);
 
     const removeItem = (id, amount) => {

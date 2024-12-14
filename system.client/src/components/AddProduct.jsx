@@ -1,11 +1,14 @@
 import "../styles/AddProductStyle.css"
 import CreateProductModal from "./modals/CreateProductModal";
 import "../styles/modalStyles/CreateProductModalStyle.css";
-import { useState } from "react";
-import {createProduct} from "../api/ProductsApi"
+import { useState, useContext} from "react";
+import { createProduct, getProducts} from "../api/ProductsApi"
+import {ProductContext} from "../App"
 
 
-function AddProduct({products, setProducts}) {
+function AddProduct() {
+    const { products, setProducts } = useContext(ProductContext);
+
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const openModal = () => {
@@ -13,7 +16,10 @@ function AddProduct({products, setProducts}) {
     }
 
     const addProduct = async (id, name, price) => {
-        return await createProduct(name, price);
+        let response = await createProduct(name, price);
+        if (response.ok) {
+            getProducts().then((data) => setProducts(data));
+        }
     }
 
     return (
@@ -26,8 +32,7 @@ function AddProduct({products, setProducts}) {
                 setModalIsOpen={setModalIsOpen}
                 apiMethod={addProduct}
                 id={0}
-                products={products}
-                setProducts={setProducts} />
+            />
         </>
     );
 }
