@@ -7,9 +7,23 @@ function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products}) {
         setModalIsOpen(false);
     }
 
-    useEffect(() => {
-        console.log("aaa");
-    }, []);
+    const calculateTotal = (products) => {
+        let total = (products.reduce((sum, product) => {
+            let priceStr = product.price.toString();
+            if (/\.$/.test(priceStr)) {
+                priceStr += "00";
+            } else if (/\.[0 - 9]$ /.test(priceStr)) {
+                priceStr += "0";
+            } else if (!/\./.test(priceStr)) {
+                priceStr += ".00";
+            }
+
+            priceStr = priceStr.replace(/\./, '');
+            return parseInt(priceStr) * product.quantity + sum;
+        }, 0)) / 100;
+
+        return total;
+    }
 
     return (
         <>
@@ -30,7 +44,7 @@ function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products}) {
                     <hr />
                     <div>
                         <div className="inline">Total:</div>
-                        <div className="inline-right">{(products.reduce((sum, product) => sum + (product.price * 100 * product.quantity), 0)) / 100} eur</div>
+                        <div className="inline-right">{calculateTotal(products)} eur</div>
                     </div>
                     <div>
                         <button className="inline marginTop">Delete</button>

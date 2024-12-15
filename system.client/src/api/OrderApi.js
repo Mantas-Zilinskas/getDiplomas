@@ -39,6 +39,25 @@ export const getOrder = (order) => {
     })
 }
 
+export const getUnpaidOrders = async () => {
+
+    return fetch('https://localhost:7089/api/Order/Unpaid', {
+        method: 'Get',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok " + response.statusText);
+            alert("Something went wrong while fetching orders");
+        }
+        return response.json(); // Parse the JSON response
+    }).catch(error => {
+        console.error("There was a problem with the fetch operation:", error);
+        alert("Something went wrong while fetching orders");
+    })
+}
+
 export const updateOrder = (orderId, orderUpdate) => {
 
     fetch('https://localhost:7089/api/Order/' + orderId, {

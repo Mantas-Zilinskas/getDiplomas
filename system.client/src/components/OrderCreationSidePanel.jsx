@@ -10,12 +10,30 @@ function OrderCreationSidePanel({ items, setItems}) {
     const [total, setTotal] = useState(0);
     const [infoModalIsOpen, setInfoModalIsOpen] = useState(false);
 
+    const calculateTotal = (products) => {
+        let total = (products.reduce((sum, product) => {
+            let priceStr = product.price.toString();
+            if (/\.$/.test(priceStr)) {
+                priceStr += "00";
+            } else if (/\.[0 - 9]$ /.test(priceStr)) {
+                priceStr += "0";
+            } else if (!/\./.test(priceStr)) {
+                priceStr += ".00";
+            }
+
+            priceStr = priceStr.replace(/\./, '');
+            return parseInt(priceStr) * product.amount + sum;
+        }, 0)) / 100;
+
+        return total;
+    }
+
     useEffect(() => {
         let c = 0
         for (let i = 0; i < items.length; ++i) {
             c += items 
         }
-        setTotal(items.reduce((sum, item) => sum + (parseInt(item.price.toString().replace(/\./, '')) * item.amount), 0));
+        setTotal(calculateTotal(items));
     }, [items]);
 
     const removeItem = (id, amount) => {
@@ -57,7 +75,7 @@ function OrderCreationSidePanel({ items, setItems}) {
                     <hr/>
                 </div>))}
                 <div className="totalWindow">
-                    Total: {total/100} eur
+                    Total: {total} eur
                     <button onClick={handleSubmit}>Create Order</button>
                 </div>
             </div>
