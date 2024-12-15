@@ -1,6 +1,6 @@
 export const getProducts = async () => {
 
-    return fetch('https://localhost:7089/api/Products', {
+    return fetch('https://localhost:7089/api/Products/Active', {
         method: 'Get',
         headers: {
             'Content-Type': 'application/json',

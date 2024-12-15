@@ -42,6 +42,23 @@ function Order({id, products}) {
         return total;
     }
 
+    const calculateOne = (product) => {
+        
+        let priceStr = product.price.toString();
+        if (/\.$/.test(priceStr)) {
+            priceStr += "00";
+        } else if (/\.[0 - 9]$ /.test(priceStr)) {
+            priceStr += "0";
+        } else if (!/\./.test(priceStr)) {
+            priceStr += ".00";
+        }
+
+        priceStr = priceStr.replace(/\./, '');
+
+
+        return product.quantity * parseInt(priceStr) / 100;
+    }
+
     return (
         <>
             <div className="orderBox">
@@ -50,7 +67,7 @@ function Order({id, products}) {
                 {items.map((product, index) => (
                     <div key={index}>
                         <div className="inline">{product.quantity} - {product.name}</div>
-                        <div className="inline-right">{product.quantity * product.price} eur</div>      
+                        <div className="inline-right">{calculateOne(product)} eur</div>      
                     </div>
                 ))}
                 {(products.length > 3) ? (<div>+ {products.length - 3} more</div>):null}

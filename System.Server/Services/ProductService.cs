@@ -20,8 +20,10 @@ namespace System.Server.Services
         {
             return await _context.Products.ToListAsync();
         }
-
-
+        public async Task<IEnumerable<Product>> GetAllActiveProducts()
+        {
+            return await _context.Products.Where(o => o.IsDeleted == false).ToListAsync();
+        }
         public async Task<Product> GetProductById(long id)
         {
             var product = await _context.Products.FindAsync(id);
