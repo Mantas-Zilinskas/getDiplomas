@@ -1,12 +1,14 @@
 import "../styles/OrderCreationSidePanelStyle.css"
 import React, { useEffect, useState } from "react";
-import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
 import { createOrder } from '../api/OrderApi'
 import CloseIcon from '@mui/icons-material/Close';
+import InfoModal from "./modals/InfoModal"
+
 
 function OrderCreationSidePanel({ items, setItems}) {
 
     const [total, setTotal] = useState(0);
+    const [infoModalIsOpen, setInfoModalIsOpen] = useState(false);
 
     useEffect(() => {
         let c = 0
@@ -20,7 +22,7 @@ function OrderCreationSidePanel({ items, setItems}) {
         setItems(items.filter((product) => !(product.amount == amount && product.id == id)));
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (items.length == 0) return
 
         let order = {
@@ -30,7 +32,10 @@ function OrderCreationSidePanel({ items, setItems}) {
             DiscountId: 0,
             ReservationId: 0,
         }
-        createOrder(order);
+        let response = await createOrder(order);
+        if (response.ok) {
+            setInfoModalIsOpen(true);
+        }
 
         setTotal(0);
         setItems([]);
@@ -56,6 +61,7 @@ function OrderCreationSidePanel({ items, setItems}) {
                     <button onClick={handleSubmit}>Create Order</button>
                 </div>
             </div>
+            <InfoModal modalIsOpen={infoModalIsOpen} setModalIsOpen={setInfoModalIsOpen} text={"Order created successfully"} />
         </>
     );
 }

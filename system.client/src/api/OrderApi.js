@@ -1,8 +1,8 @@
 
 
-export const createOrder = (object) => {
+export const createOrder = async (object) => {
 
-    fetch('https://localhost:7089/api/Order', {
+    return await fetch('https://localhost:7089/api/Order', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -11,12 +11,12 @@ export const createOrder = (object) => {
     }).then(response => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
+            alert("An error occured while creating an order");
         }
-        return response.json(); // Parse the JSON response
-    }).then(data => {
-        console.log("Received response:", data); // Log the array of strings received back
+        return response; // Parse the JSON response
     }).catch(error => {
         console.error("There was a problem with the fetch operation:", error);
+        alert("An error occured while creating an order");
     })
 }
 
