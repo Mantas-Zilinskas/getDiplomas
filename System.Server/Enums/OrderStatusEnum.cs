@@ -4,6 +4,7 @@
     {
         Open,
         Closed,
-        Refunded
+        Refunded,
+        Canceled
     }
 }
