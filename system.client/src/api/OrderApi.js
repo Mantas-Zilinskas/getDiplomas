@@ -76,9 +76,9 @@ export const updateOrder = (orderId, orderUpdate) => {
     })
 }
 
-export const deleteOrder = (orderId) => {
+export const deleteOrder = async (orderId) => {
 
-    fetch('https://localhost:7089/api/Order/' + orderId, {
+    return await fetch('https://localhost:7089/api/Order/' + orderId, {
         method: 'Delete',
         headers: {
             'Content-Type': 'application/json',
@@ -86,10 +86,12 @@ export const deleteOrder = (orderId) => {
     }).then(response => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
+            alert("An error occurred while canceling the order");
         }
         return response; // Parse the JSON response
     }).catch(error => {
         console.error("There was a problem with the fetch operation:", error);
+        alert("An error occurred while canceling the order");
     })
 }
 

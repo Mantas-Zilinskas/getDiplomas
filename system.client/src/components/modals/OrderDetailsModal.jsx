@@ -1,10 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { OrderContext } from '../../App'
 import Modal from "react-modal";
 import "../../styles/modalStyles/OrderDetailsModalStyle.css"
+import { deleteOrder } from "../../api/OrderApi";
 function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products}) {
+
+    const { orders, setOrders } = useContext(OrderContext);
 
     const Close = () => {
         setModalIsOpen(false);
+    }
+
+    const cancelOrder = async () => {
+        let response = await deleteOrder(id);
+        if (response.ok) {
+            setOrders(orders.filter(order => order.id != id));
+            setModalIsOpen(false);
+        }
     }
 
     const calculateTotal = (products) => {
@@ -63,7 +75,7 @@ function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products}) {
                         <div className="inline-right">{calculateTotal(products)} eur</div>
                     </div>
                     <div>
-                        <button className="inline marginTop">Delete</button>
+                        <button className="inline marginTop" onClick={cancelOrder}>Cancel</button>
                         <button className="inline-right marginTop">Edit</button>
                     </div>
                 </div>
