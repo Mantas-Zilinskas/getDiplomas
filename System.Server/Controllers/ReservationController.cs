@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Server.IServices;
 using System.Server.Models;
 using System.Server.Models.DTO;
 using System.Text.Json;
@@ -9,50 +10,48 @@ namespace System.Server.Controllers
     [ApiController]
     public class ReservationController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
-        {
-            List<ReservationDTO> list = new List<ReservationDTO>();
-            list.Add(new ReservationDTO());
-            list.Add(new ReservationDTO());
+        private readonly IReservationService _reservationService;
 
-            string returnable = JsonSerializer.Serialize(list);
-            return Ok(returnable);
+        public ReservationController(IReservationService reservationService)
+        {
+            _reservationService = reservationService;
+        }
+        [HttpGet]
+        public async Task<IActionResult>GetAll()
+        {
+            var reservations = await _reservationService.GetAllReservations();
+            return Ok(reservations);
         }
         [HttpPost]
-        public IActionResult Post([FromBody] ReservationDTO reservation)
+        public async Task<IActionResult> Post([FromBody] ReservationDTO reservation)
         {
-            string obj = JsonSerializer.Serialize(reservation);
-            Console.WriteLine(obj);
-
-            return Ok(obj);
+            if (reservation == null)
+            {
+                BadRequest();
+            }
+            else
+            {
+                await _reservationService.CreateReservation(reservation);
+            }
+            return Ok();
         }
         [HttpGet("{reservationId}")]
-        public IActionResult Get(int reservationId)
+        public async Task<IActionResult> GetById(int reservationId)
         {
-            Console.WriteLine(reservationId);
-            var reservation = new ReservationDTO();
-            string returnable = JsonSerializer.Serialize(reservation);
-
-            return Ok(returnable);
+            var reservation = await _reservationService.GetReservationById(reservationId);
+            return Ok(reservation);
         }
         [HttpPut("{reservationId}")]
-        public IActionResult Put(int reservationId, [FromBody] ReservationDTO reservation)
+        public async Task<IActionResult> Put(int reservationId, [FromBody] ReservationDTO reservation)
         {
-            string obj = JsonSerializer.Serialize(reservation);
-            Console.WriteLine(reservationId);
-            Console.WriteLine(obj);
-
-            return Ok(obj);
+            await _reservationService.UpdateReservation(reservationId, reservation);
+            return Ok();
         }
         [HttpDelete("{reservationId}")]
-        public IActionResult Delete(int reservationId)
+        public async Task<IActionResult> Delete(int reservationId)
         {
-            Console.WriteLine(reservationId);
-            var reservation = new ReservationDTO();
-            string returnable = JsonSerializer.Serialize(reservation);
-
-            return Ok(returnable);
+            await _reservationService.DeleteReservation(reservationId);
+            return Ok();
         }
 
     }

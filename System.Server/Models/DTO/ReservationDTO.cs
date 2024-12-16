@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Server.Enums;
+﻿using System.Server.Enums;
 
 namespace System.Server.Models
 {
@@ -9,7 +8,7 @@ namespace System.Server.Models
         public DateTime AppointmentTime { get; set; }
         public long EmployeeId { get; set; }
         public required string CustomerName { get; set; }
-        public required PhoneAttribute CustomerPhoneNumber { get; set; }
+        public required string CustomerPhoneNumber { get; set; }
         public int NumberOfGuests { get; set; }
         public ServiceType Service { get; set; }
     }
