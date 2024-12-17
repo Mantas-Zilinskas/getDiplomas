@@ -37,7 +37,7 @@ namespace System.Server.Services
                 CustomerName = reservation.CustomerName,
                 CustomerPhoneNumber = reservation.CustomerPhoneNumber,
                 NumberOfGuests = reservation.NumberOfGuests,
-                Service = reservation.Service,
+                orderId = reservation.orderId,
             };
             _context.Reservations.Add(newReservation);
             await _context.SaveChangesAsync();
@@ -55,7 +55,7 @@ namespace System.Server.Services
             oldReservation.CustomerName = reservation.CustomerName;
             oldReservation.CustomerPhoneNumber = reservation.CustomerPhoneNumber;
             oldReservation.NumberOfGuests = reservation.NumberOfGuests;
-            oldReservation.Service = reservation.Service;
+            oldReservation.orderId = reservation.orderId;
             await _context.SaveChangesAsync();
         }
         public async Task DeleteReservation(long id)

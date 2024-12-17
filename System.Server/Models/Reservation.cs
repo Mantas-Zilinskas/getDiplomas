@@ -11,6 +11,6 @@ namespace System.Server.Models
         public string CustomerName { get; set; }
         public string CustomerPhoneNumber { get; set; }
         public int NumberOfGuests { get; set; }
-        public ServiceType Service { get; set; }
+        public long orderId { get; set; }
     }
 }
