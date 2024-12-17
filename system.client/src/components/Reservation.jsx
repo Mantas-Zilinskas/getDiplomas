@@ -1,5 +1,5 @@
 import "../styles/ReservationStyle.css";
-import React { useRef } from "react";
+import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { deleteReservation } from "../api/ReservationApi";
 
