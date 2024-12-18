@@ -15,7 +15,7 @@ function OrderCreationSidePanel({ items, setItems}) {
             let priceStr = product.price.toString();
             if (/\.$/.test(priceStr)) {
                 priceStr += "00";
-            } else if (/\.[0 - 9]$ /.test(priceStr)) {
+            } else if (/\.[0-9]$/.test(priceStr)) {
                 priceStr += "0";
             } else if (!/\./.test(priceStr)) {
                 priceStr += ".00";

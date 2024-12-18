@@ -150,21 +150,22 @@ namespace System.Server.Services
         public async Task PayForOrder(long id, PaymentResponseDTO payment)
         {
             var order = await GetOrderById(id);
-            var orderPrice = CalculateOrderPrice(order.Products);
-            if (payment.Amount == orderPrice)
+            var orderPrice = order.Products.Sum(p => p.Price * p.Quantity);
+            var paid = order.Payments.Sum(p => p.Amount);
+            var orderEntity = await _context.Orders.FindAsync(id);
+
+            var newPayment = new Payment()
             {
-                var paymentOrder = await _context.Orders.FindAsync(order.Id);
-                if (paymentOrder != null)
-                {
-                    paymentOrder.Status = OrderStatus.Closed;
-                    _context.Payments.Add(new Payment
-                    {
-                        OrderId = order.Id,
-                        Amount = payment.Amount,
-                        Method = payment.Method
-                    });
-                }
+                OrderId = id,
+                Amount = payment.Amount,
+                Method = payment.Method
+            };
+            await _context.Payments.AddAsync(newPayment);
+
+            if (orderPrice <= (paid + payment.Amount)) {
+                orderEntity.Status = OrderStatus.Closed;
             }
+
             await _context.SaveChangesAsync();
         }
         public decimal CalculateOrderPrice(List<OrderGetProductDTO> products)

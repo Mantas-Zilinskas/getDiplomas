@@ -95,22 +95,27 @@ export const deleteOrder = async (orderId) => {
     })
 }
 
-export const payOrder = (orderId, payment) => {
+export const payOrder = async (orderId, payment) => {
 
-    fetch('https://localhost:7089/api/Order/' + orderId + "/Pay", {
+    let obj = {
+        amount: payment,
+        method: 1
+    }
+
+    return await fetch("https://localhost:7089/api/Order/" + orderId + "/Pay", {
         method: 'Post',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payment)
+        body: JSON.stringify(obj)
     }).then(response => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
+            alert("Something went wrong while processing payment");
         }
-        return response.json(); // Parse the JSON response
-    }).then(data => {
-        console.log("Received response:", data); // Log the array of strings received back
+        return response; // Parse the JSON response
     }).catch(error => {
         console.error("There was a problem with the fetch operation:", error);
+        alert("Something went wrong while processing payment");
     })
 }

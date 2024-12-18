@@ -3,10 +3,11 @@ import "../styles/OrderStyle.css";
 import PayModal from "./modals/PayModal";
 import OrderDetailsModal from "./modals/OrderDetailsModal";
 
-function Order({id, products}) {
+function Order({id, products, payments}) {
     const [items, setItems] = useState([]);
     const [payModalOpen, setPayModalOpen] = useState(false);
     const [orderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false);
+    const [paid, setPaid] = useState(0);
 
     const openPayModal = () => {
         setPayModalOpen(true);
@@ -22,41 +23,38 @@ function Order({id, products}) {
         } else {
             setItems(products)
         }
+
+        if (payments != []) {
+            setPaid(payments.reduce((sum, payment) => {
+                return convertToCents(payment.amount) + sum;
+            }, 0) / 100);
+        }
     }, []);
 
-    const calculateTotal = (products) =>{
-        let total = (products.reduce((sum, product) => {
-            let priceStr = product.price.toString();
-            if (/\.$/.test(priceStr)) {
-                priceStr += "00";
-            } else if (/\.[0 - 9]$ /.test(priceStr)) {
-                priceStr += "0";
-            } else if (!/\./.test(priceStr)) {
-                priceStr += ".00";
-            }
-
-            priceStr = priceStr.replace(/\./, '');
-            return parseInt(priceStr) * product.quantity + sum;
-        }, 0)) / 100;
-
-        return total;
-    }
-
-    const calculateOne = (product) => {
-        
-        let priceStr = product.price.toString();
+    const convertToCents = (price) => {
+        let priceStr = price.toString();
         if (/\.$/.test(priceStr)) {
             priceStr += "00";
-        } else if (/\.[0 - 9]$ /.test(priceStr)) {
+        } else if (/\.[0-9]$/.test(priceStr)) {
             priceStr += "0";
         } else if (!/\./.test(priceStr)) {
             priceStr += ".00";
         }
 
         priceStr = priceStr.replace(/\./, '');
+        return parseInt(priceStr);
+    }
 
+    const calculateTotal = (products) =>{
+        let total = (products.reduce((sum, product) => {
+            return convertToCents(product.price) * product.quantity + sum;
+        }, 0)) / 100;
 
-        return product.quantity * parseInt(priceStr) / 100;
+        return total;
+    }
+
+    const calculateOne = (product) => {
+        return product.quantity * convertToCents(product.price) / 100;
     }
 
     return (
@@ -75,15 +73,19 @@ function Order({id, products}) {
                 <div> 
                     <div className="inline">Total:</div>
                     <div className="inline-right">{calculateTotal(products)} eur</div>
-                </div>                              
+                </div>
+                <div>
+                    <div className="inline">Paid:</div>
+                    <div className="inline-right">{paid} eur</div>
+                </div> 
                 <br />
                 <div>
                     <button className="inline" onClick={openOrderDetailsModal}>Details</button>
                     <button className="inline-right" onClick={openPayModal}>Pay</button>
                 </div>
             </div>
-            <PayModal modalIsOpen={payModalOpen} setModalIsOpen={setPayModalOpen} />
-            <OrderDetailsModal modalIsOpen={orderDetailsModalOpen} setModalIsOpen={setOrderDetailsModalOpen} id={id} products={products} />
+            <PayModal modalIsOpen={payModalOpen} setModalIsOpen={setPayModalOpen} id={id} setPaid={setPaid} paid={paid} price={calculateTotal(products)} />
+            <OrderDetailsModal modalIsOpen={orderDetailsModalOpen} setModalIsOpen={setOrderDetailsModalOpen} id={id} products={products} paid={paid} />
         </>
     );
 }

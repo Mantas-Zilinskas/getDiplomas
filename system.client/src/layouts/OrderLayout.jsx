@@ -28,7 +28,8 @@ export function OrderLayout() {
                         <Order
                             key={order.id}
                             id={order.id}
-                            products={order.products}/>
+                            products={order.products}
+                            payments={order.payments}/>
                     ))
                     :
                     (<h2>Loading Please wait</h2>)}

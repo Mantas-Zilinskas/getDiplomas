@@ -3,7 +3,7 @@ import { OrderContext } from '../../App'
 import Modal from "react-modal";
 import "../../styles/modalStyles/OrderDetailsModalStyle.css"
 import { deleteOrder } from "../../api/OrderApi";
-function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products}) {
+function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products, paid}) {
 
     const { orders, setOrders } = useContext(OrderContext);
 
@@ -24,7 +24,7 @@ function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products}) {
             let priceStr = product.price.toString();
             if (/\.$/.test(priceStr)) {
                 priceStr += "00";
-            } else if (/\.[0 - 9]$ /.test(priceStr)) {
+            } else if (/\.[0-9]$/.test(priceStr)) {
                 priceStr += "0";
             } else if (!/\./.test(priceStr)) {
                 priceStr += ".00";
@@ -75,9 +75,17 @@ function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products}) {
                         <div className="inline-right">{calculateTotal(products)} eur</div>
                     </div>
                     <div>
-                        <button className="inline marginTop" onClick={cancelOrder}>Cancel</button>
-                        <button className="inline-right marginTop">Edit</button>
+                        <div className="inline">Paid:</div>
+                        <div className="inline-right">{paid} eur</div>
                     </div>
+                    
+                    {(paid == 0) ?(
+                        <div>
+                            <button className="inline marginTop" onClick={cancelOrder}>Cancel Order</button>
+                            <button className="inline-right marginTop">Edit</button>
+                        </div>
+                    ):(null)}
+                    
                 </div>
             </Modal>
         </>
