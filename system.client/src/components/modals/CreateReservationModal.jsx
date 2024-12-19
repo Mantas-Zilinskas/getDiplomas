@@ -10,11 +10,13 @@ function CreateReservationModal({ modalIsOpen, setModalIsOpen, apiMethod, id }) 
     const [phoneError, setPhoneError] = useState(false);
     const [dateError, setDateError] = useState(false);
     const [guestsError, setGuestsError] = useState(false);
+    const [orderError, setOrderError] = useState(false);
 
     const nameRef = useRef(null);
     const phoneRef = useRef(null);
     const dateRef = useRef(null);
     const guestsRef = useRef(null);
+    const orderRef = useRef(null);
 
     const phoneRegex = /^[+]?[\d\s()-]+$/;
     const guestsRegex = /^[1-9][0-9]*$/;
@@ -24,6 +26,7 @@ function CreateReservationModal({ modalIsOpen, setModalIsOpen, apiMethod, id }) 
         setPhoneError(false);
         setDateError(false);
         setGuestsError(false);
+        setOrderError(false);
         setModalIsOpen(false);
     };
 
@@ -32,6 +35,7 @@ function CreateReservationModal({ modalIsOpen, setModalIsOpen, apiMethod, id }) 
         setPhoneError(false);
         setDateError(false);
         setGuestsError(false);
+        setOrderError(false);
 
         let hasError = false;
 
@@ -50,6 +54,9 @@ function CreateReservationModal({ modalIsOpen, setModalIsOpen, apiMethod, id }) 
         if (!guestsRegex.test(guestsRef.current.value)) {
             setGuestsError(true);
             hasError = true;
+        } if(!guestsRegex.test(orderRef.current.value)){
+            setOrderError(true);
+            hasError = true;
         }
 
         return hasError;
@@ -62,7 +69,8 @@ function CreateReservationModal({ modalIsOpen, setModalIsOpen, apiMethod, id }) 
             nameRef.current.value.trim(),
             phoneRef.current.value.trim(),
             dateRef.current.value,
-            Number(guestsRef.current.value)
+            Number(guestsRef.current.value),
+            Number(orderRef.current.value)
         );
 
         close();
@@ -100,7 +108,12 @@ function CreateReservationModal({ modalIsOpen, setModalIsOpen, apiMethod, id }) 
                 {guestsError && <div className="error">Must be a positive number</div>}
                 <input type="number" ref={guestsRef} className="input" />
             </div>
-
+            <div>
+                <label>Order Id:</label>
+                {orderError && <div className="error">Must be a positive number</div>}
+                <input type="number" ref={orderRef} className="input" />
+            </div>
+            <br/>
             <button onClick={submit}>Submit</button>
         </Modal>
     );

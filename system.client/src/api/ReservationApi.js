@@ -42,7 +42,7 @@ export const createReservation = async (object) => {
     return fetch('https://localhost:7089/api/Reservation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(reservation),
+        body: JSON.stringify(object),
     })
         .then(response => {
             if (!response.ok) {
