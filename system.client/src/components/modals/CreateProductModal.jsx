@@ -1,15 +1,17 @@
 import Modal from "react-modal";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import {ProductContext} from "../../App"
 import { useRef } from "react";
 import { getProducts } from "../../api/ProductsApi";
 import "../../styles/modalStyles/CreateProductModalStyle.css";
 
-function CreateProductModal({ modalIsOpen, setModalIsOpen, products, setProducts, apiMethod, id}) {
+function CreateProductModal({ modalIsOpen, setModalIsOpen, apiMethod, id }) {
+    const { products, setProducts } = useContext(ProductContext);
     const [nameError, setNameError] = useState(false);
     const [priceError, setPriceError] = useState(false);
     const nameRef = useRef(null);
     const priceRef = useRef(null);
-    const priceRegex = /^([1-9][0-9]+|[0-9])(\.|\.[0-9]{1,2})?$/;
+    const priceRegex = /^([1-9][0-9]+|[0-9])(\.[0-9]{2})$/;
 
     const Close = () => {
         setNameError(false);
@@ -38,15 +40,13 @@ function CreateProductModal({ modalIsOpen, setModalIsOpen, products, setProducts
     const submit = async () => {
 
         if (validate()) return;
-        const response = await apiMethod(id, nameRef.current.value, Number(priceRef.current.value));
+        await apiMethod(id, nameRef.current.value, Number(priceRef.current.value));
         setNameError(false);
         setPriceError(false);
-
-        if (!response.ok) {
-            allert("Something went wrong while creating new catalog item.");
-        } else {
-            getProducts().then((data) => setProducts(data));
-        }
+        Close();
+        //if (response.ok) {
+        //    getProducts().then((data) => setProducts(data));
+        //}
     }
 
   return (
@@ -63,7 +63,7 @@ function CreateProductModal({ modalIsOpen, setModalIsOpen, products, setProducts
               <br />
               <br />
               <div>product/service price:</div>
-              {(priceError) ? (<div className="error">Must be a positive number with<br />up to two digits after floating point</div>) : (null)}
+              {(priceError) ? (<div className="error">Must be a positive number with<br />two digits after floating point</div>) : (null)}
               <input type="text" className="input" ref={priceRef}></input>
               <br />
               <br />

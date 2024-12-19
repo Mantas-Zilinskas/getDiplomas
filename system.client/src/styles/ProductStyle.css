@@ -19,6 +19,9 @@
     max-width: 200px;
     font-size: 14px;
 }
+.productBox .inline {
+    display: inline;
+}
 .productBox .inline-right {
     display: inline;
     float: right;
@@ -26,6 +29,13 @@
 .productBox .closeIcon {
     border-radius: 5px;
     margin-left: 2px;
+}
+.productBox .editIcon {
+    border-radius: 5px;
+    margin-left: 2px;
+}
+.productBox .editIcon:hover {
+    background-color: grey;
 }
 .productBox .hover{
     border-radius: 5px;

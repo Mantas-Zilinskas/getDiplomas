@@ -34,6 +34,12 @@ namespace System.Server.Controllers
             }
             return Ok(product);
         }
+        [HttpGet("Active")]
+        public async Task<IActionResult> GetActive()
+        {
+            var products = await _productService.GetAllActiveProducts();
+            return Ok(products);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ProductDTO product)
