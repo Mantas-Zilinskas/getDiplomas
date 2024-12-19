@@ -8,10 +8,10 @@ import { getUnpaidOrders } from '../api/OrderApi'
 
 export function OrderLayout() {
     const { orders, setOrders } = useContext(OrderContext);
-
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        getUnpaidOrders().then(result => setOrders(result)); 
+        getUnpaidOrders().then(result => setOrders(result)).then(()=>setIsLoaded(true));
     },[]);
 
     return (
@@ -22,7 +22,7 @@ export function OrderLayout() {
                 <div className="content">
                     <h1>Im Order</h1>
                 </div>
-                {orders != null
+                {isLoaded
                     ?
                     orders.map((order) => (
                         <Order

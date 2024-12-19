@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../../styles/modalStyles/InfoModalStyle.css"
-export function InfoModal({ modalIsOpen, setModalIsOpen, text }) {
+export function InfoModal({ modalIsOpen, setModalIsOpen, text, closeFunc }) {
 
     const Close = () => {
+        if (closeFunc != undefined) {
+            closeFunc();
+        }
         setModalIsOpen(false);
     }
 

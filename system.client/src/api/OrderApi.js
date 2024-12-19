@@ -20,9 +20,9 @@ export const createOrder = async (object) => {
     })
 }
 
-export const getOrder = (order) => {
+export const getOrder = async (order) => {
 
-    fetch('https://localhost:7089/api/Order/' + order, {
+    return fetch('https://localhost:7089/api/Order/' + order, {
         method: 'Get',
         headers: {
             'Content-Type': 'application/json',
@@ -30,12 +30,12 @@ export const getOrder = (order) => {
     }).then(response => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
+            alert("Something went wrong while trying to get order information");
         }
-        return response.json(); // Parse the JSON response
-    }).then(data => {
-        console.log("Received response:", data); // Log the array of strings received back
+        return response.json();
     }).catch(error => {
         console.error("There was a problem with the fetch operation:", error);
+        alert("Something went wrong while trying to get order information");
     })
 }
 
@@ -58,9 +58,9 @@ export const getUnpaidOrders = async () => {
     })
 }
 
-export const updateOrder = (orderId, orderUpdate) => {
+export const updateOrder = async (orderId, orderUpdate) => {
 
-    fetch('https://localhost:7089/api/Order/' + orderId, {
+    return await fetch('https://localhost:7089/api/Order/' + orderId, {
         method: 'Put',
         headers: {
             'Content-Type': 'application/json',
@@ -69,10 +69,12 @@ export const updateOrder = (orderId, orderUpdate) => {
     }).then(response => {
         if (!response.ok) {
             throw new Error("Network response was not ok " + response.statusText);
+            alert("Something went wrong while updating the order");
         }
-        return response; // Parse the JSON response
+        return response; 
     }).catch(error => {
         console.error("There was a problem with the fetch operation:", error);
+        alert("Something went wrong while updating the order");
     })
 }
 

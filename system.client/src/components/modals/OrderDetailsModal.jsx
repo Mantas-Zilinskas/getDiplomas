@@ -3,8 +3,10 @@ import { OrderContext } from '../../App'
 import Modal from "react-modal";
 import "../../styles/modalStyles/OrderDetailsModalStyle.css"
 import { deleteOrder } from "../../api/OrderApi";
+import { useNavigate } from "react-router-dom";
 function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products, paid}) {
 
+    const navigate = useNavigate();
     const { orders, setOrders } = useContext(OrderContext);
 
     const Close = () => {
@@ -42,7 +44,7 @@ function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products, paid}) {
         let priceStr = product.price.toString();
         if (/\.$/.test(priceStr)) {
             priceStr += "00";
-        } else if (/\.[0 - 9]$ /.test(priceStr)) {
+        } else if (/\.[0-9]$/.test(priceStr)) {
             priceStr += "0";
         } else if (!/\./.test(priceStr)) {
             priceStr += ".00";
@@ -51,6 +53,10 @@ function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products, paid}) {
         priceStr = priceStr.replace(/\./, '');
 
         return product.quantity * parseInt(priceStr) / 100;
+    }
+
+    const editOrder = () => {
+        navigate("/EditOrder", { state: {orderId:id}})
     }
 
     return (
@@ -82,7 +88,7 @@ function OrderDetailsModal({ modalIsOpen, setModalIsOpen, id, products, paid}) {
                     {(paid == 0) ?(
                         <div>
                             <button className="inline marginTop" onClick={cancelOrder}>Cancel Order</button>
-                            <button className="inline-right marginTop">Edit</button>
+                            <button className="inline-right marginTop" onClick={editOrder}>Edit</button>
                         </div>
                     ):(null)}
                     
