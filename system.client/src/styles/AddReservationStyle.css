@@ -1,0 +1,12 @@
+.addReservationBox {
+    padding: 20px;
+    margin: 5px;
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+    width: 200px;
+    height: 125px;
+    display: flex;
+    place-items: center;
+    font-size: 30px;
+}

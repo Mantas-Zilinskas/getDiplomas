@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import CreateReservationModal from "./modals/CreateReservationModal";
 import { createReservation, getReservations } from "../api/ReservationApi";
-import "../styles/AddProductStyle.css"
+import "../styles/AddReservationStyle.css"
 import { ReservationContext } from "../App"
 
 function AddReservation() {
