@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { ReservationContext } from "../App"
 import SideBar from '../components/SideBar';
 import Header from '../components/Header';
 import { getReservations } from "../api/ReservationAPI";
@@ -8,7 +9,7 @@ import '../styles/LayoutStyle.css'
 import AddReservation from '../components/AddReservation';
 
 export function ReservationLayout() {
-    const [reservations, setReservations] = useState([]);
+    const { reservations, setReservations } = useContext(ReservationContext);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -33,8 +34,9 @@ export function ReservationLayout() {
                     Array.isArray(reservations) && reservations.length > 0 ? (
                         reservations.map(reservation => (
                             <Reservation
-                                key={reservation.orderId}// Use `orderId` as the unique key
-                                id={reservation.orderId}
+                                key={reservation.id}// Use `orderId` as the unique key
+                                id={reservation.id}
+                                orderId={ reservation.orderId}
                                 customer={reservation.customerName}
                                 phone={reservation.customerPhoneNumber}
                                 bookingTime={reservation.bookingTime}
@@ -50,7 +52,7 @@ export function ReservationLayout() {
                 ) : (
                     <h2>Loading reservations...</h2>
                 )}
-                {reservations != null
+                {isLoaded
                     ?
                     <AddReservation />
                     : (null)}

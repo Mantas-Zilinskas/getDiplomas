@@ -6,7 +6,7 @@ import { deleteReservation, updateReservation } from "../api/ReservationApi";
 import EditIcon from '@mui/icons-material/Edit';
 import CreateReservationModal from "./modals/CreateReservationModal"
 
-function Reservation({ id, customer, phone, setList, list, appointmentTime, guests}) {
+function Reservation({ id, orderId, customer, phone, setList, list, appointmentTime, guests}) {
     const { reservations, setReservations } = useContext(ReservationContext);
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
 
@@ -51,7 +51,7 @@ function Reservation({ id, customer, phone, setList, list, appointmentTime, gues
             <div className="reservationBox">
                 <EditIcon className="inline editIcon" onClick={openEditModal} />
                 <CloseIcon className="inline-right closeIcon" onClick={deleteItem} />
-                <div className="center">{id}</div>
+                <div className="center">Order id: {orderId}</div>
                 <p>Name: {customer}</p>
                 <p>Phone: {phone}</p>
                 <p>Appointment Time: {new Date(appointmentTime).toLocaleString()}</p>
