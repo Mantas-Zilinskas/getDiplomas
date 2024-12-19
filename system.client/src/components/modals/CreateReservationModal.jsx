@@ -20,6 +20,7 @@ function CreateReservationModal({ modalIsOpen, setModalIsOpen, apiMethod, id }) 
 
     const phoneRegex = /^[+]?[\d\s()-]+$/;
     const guestsRegex = /^[1-9][0-9]*$/;
+    const idRegex =/^([0-9]|[1-9]+)$/;
 
     const close = () => {
         setNameError(false);
@@ -54,7 +55,7 @@ function CreateReservationModal({ modalIsOpen, setModalIsOpen, apiMethod, id }) 
         if (!guestsRegex.test(guestsRef.current.value)) {
             setGuestsError(true);
             hasError = true;
-        } if(!guestsRegex.test(orderRef.current.value)){
+        } if(!idRegex.test(orderRef.current.value)){
             setOrderError(true);
             hasError = true;
         }
