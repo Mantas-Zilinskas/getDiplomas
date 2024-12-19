@@ -1,26 +1,46 @@
 import "../styles/OrderCreationSidePanelStyle.css"
 import React, { useEffect, useState } from "react";
-import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
 import { createOrder } from '../api/OrderApi'
 import CloseIcon from '@mui/icons-material/Close';
+import InfoModal from "./modals/InfoModal"
+
 
 function OrderCreationSidePanel({ items, setItems}) {
 
     const [total, setTotal] = useState(0);
+    const [infoModalIsOpen, setInfoModalIsOpen] = useState(false);
+
+    const calculateTotal = (products) => {
+        let total = (products.reduce((sum, product) => {
+            let priceStr = product.price.toString();
+            if (/\.$/.test(priceStr)) {
+                priceStr += "00";
+            } else if (/\.[0-9]$/.test(priceStr)) {
+                priceStr += "0";
+            } else if (!/\./.test(priceStr)) {
+                priceStr += ".00";
+            }
+
+            priceStr = priceStr.replace(/\./, '');
+            return parseInt(priceStr) * product.amount + sum;
+        }, 0)) / 100;
+
+        return total;
+    }
 
     useEffect(() => {
         let c = 0
         for (let i = 0; i < items.length; ++i) {
             c += items 
         }
-        setTotal(items.reduce((sum, item) => sum + (item.price * 100 * item.amount), 0));
+        setTotal(calculateTotal(items));
     }, [items]);
 
     const removeItem = (id, amount) => {
         setItems(items.filter((product) => !(product.amount == amount && product.id == id)));
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (items.length == 0) return
 
         let order = {
@@ -30,7 +50,10 @@ function OrderCreationSidePanel({ items, setItems}) {
             DiscountId: 0,
             ReservationId: 0,
         }
-        createOrder(order);
+        let response = await createOrder(order);
+        if (response.ok) {
+            setInfoModalIsOpen(true);
+        }
 
         setTotal(0);
         setItems([]);
@@ -52,10 +75,11 @@ function OrderCreationSidePanel({ items, setItems}) {
                     <hr/>
                 </div>))}
                 <div className="totalWindow">
-                    Total: {total/100} eur
+                    Total: {total} eur
                     <button onClick={handleSubmit}>Create Order</button>
                 </div>
             </div>
+            <InfoModal modalIsOpen={infoModalIsOpen} setModalIsOpen={setInfoModalIsOpen} text={"Order created successfully"} />
         </>
     );
 }

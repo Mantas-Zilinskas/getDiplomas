@@ -1,13 +1,16 @@
 import SideBar from '../components/SideBar'
 import Header from '../components/Header'
 import Product from '../components/Product'
-import {useEffect, useState, useContext} from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { getProducts } from '../api/ProductsApi'
-import OrderCreationSidePanel from '../components/OrderCreationSidePanel'
+import OrderEditingSidePanel from '../components/OrderEditingSidePanel'
+import { useLocation } from "react-router-dom";
 import AddProduct from '../components/AddProduct'
-import {ProductContext} from '../App'
+import { ProductContext } from '../App'
 
-export function CatalogLayout() {
+export function EditOrderLayout() {
+    const location = useLocation();
+    const { orderId } = location.state || {};
     const { products, setProducts } = useContext(ProductContext);
     const [orderItems, setOrderItems] = useState([]);
 
@@ -18,12 +21,12 @@ export function CatalogLayout() {
     return (
         <>
             <SideBar name="Catalog" />
-            <Header name="Catalog" />
-            <OrderCreationSidePanel items={orderItems} setItems={setOrderItems} />
+            <Header name="Edit Order" />
+            <OrderEditingSidePanel items={orderItems} setItems={setOrderItems} orderId={orderId}/>
             <div className="catalogContent">
-                <h1>Im Catalog</h1>
+                <h1>Im Order Editing Catalog</h1>
                 {products != null
-                ?
+                    ?
                     products.map((product) => (
                         <Product
                             key={product.id}
@@ -33,15 +36,15 @@ export function CatalogLayout() {
                             list={orderItems}
                             setList={setOrderItems} />
                     ))
-                :
+                    :
                     (<h2>Loading Please wait</h2>)}
                 {products != null
-                ?
-                    <AddProduct/>
-                :(null)}
+                    ?
+                    <AddProduct />
+                    : (null)}
             </div>
         </>
     );
 }
 
-export default CatalogLayout;
+export default EditOrderLayout;

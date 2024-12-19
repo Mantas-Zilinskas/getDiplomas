@@ -10,6 +10,7 @@ namespace System.Server.IServices
         Task CreateProduct(ProductDTO product);
         Task UpdateProduct(long id, ProductDTO product);
         Task DeleteProduct(long id);
+        Task<IEnumerable<Product>> GetAllActiveProducts();
 
     }
 }
