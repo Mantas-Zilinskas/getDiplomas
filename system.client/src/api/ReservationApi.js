@@ -38,7 +38,7 @@ export const getReservationById = async (reservationId) => {
         });
 };
 
-export const createReservation = async (reservation) => {
+export const createReservation = async (object) => {
     return fetch('https://localhost:7089/api/Reservation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -48,10 +48,11 @@ export const createReservation = async (reservation) => {
             if (!response.ok) {
                 throw new Error("Network response was not ok " + response.statusText);
             }
-            return response.json();
+            return response;
         })
         .catch(error => {
             console.error("There was a problem with the fetch operation:", error);
+            alert("An error occured while creating an order");
         });
 };
 

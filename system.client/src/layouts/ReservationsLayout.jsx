@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import { getReservations } from "../api/ReservationAPI";
 import Reservation from "../components/Reservation";
 import "../styles/ReservationStyle.css";
+import '../styles/LayoutStyle.css'
+import AddReservation from '../components/AddReservation';
 
 export function ReservationLayout() {
     const [reservations, setReservations] = useState([]);
@@ -25,13 +27,13 @@ export function ReservationLayout() {
         <>
             <SideBar name="Reservations" />
             <Header name="Reservations" />
-            <div className="reservationLayout">
+            <div className="reservationContent">
                 <h1>Reservations</h1>
                 {isLoaded ? (
                     Array.isArray(reservations) && reservations.length > 0 ? (
                         reservations.map(reservation => (
                             <Reservation
-                                key={reservation.orderId} // Use `orderId` as the unique key
+                                key={reservation.orderId}// Use `orderId` as the unique key
                                 id={reservation.orderId}
                                 customer={reservation.customerName}
                                 phone={reservation.customerPhoneNumber}
@@ -43,10 +45,15 @@ export function ReservationLayout() {
                         ))
                     ) : (
                         <h2>No reservations found</h2>
+
                     )
                 ) : (
                     <h2>Loading reservations...</h2>
                 )}
+                {reservations != null
+                    ?
+                    <AddReservation />
+                    : (null)}
             </div>
         </>
     );

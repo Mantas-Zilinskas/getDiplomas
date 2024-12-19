@@ -5,20 +5,24 @@ import "../styles/AddProductStyle.css"
 import { ReservationContext } from "../App"
 
 function AddReservation() {
-    const { reservations, setReservations } = useContext(ReservationContext);
-
+    const { setReservations } = useContext(ReservationContext);
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const openModal = () => {
         setModalIsOpen(true);
-    }
+    };
 
-    const addReservation = async (id, name, price) => {
-        let response = await createReservation(name, price);
-        if (response.ok) {
-            getReservations().then((data) => setReservations(data));
+    const addReservation = async (customer, phone, appointmentTime, guests) => {
+        try {
+            const response = await createReservation(customer, phone, appointmentTime, guests);
+            if (response.ok) {
+                const data = await getReservations();
+                setReservations(data);
+            }
+        } catch (error) {
+            console.error("Failed to add reservation:", error);
         }
-    }
+    };
 
     return (
         <>

@@ -6,7 +6,7 @@ import { deleteReservation, updateReservation } from "../api/ReservationApi";
 import EditIcon from '@mui/icons-material/Edit';
 import CreateReservationModal from "./modals/CreateReservationModal"
 
-function Reservation({ id, customer, phone, bookingTime, appointmentTime, guests, employee }) {
+function Reservation({ id, customer, phone, setList, list, appointmentTime, guests}) {
     const { reservations, setReservations } = useContext(ReservationContext);
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
 
@@ -24,22 +24,22 @@ function Reservation({ id, customer, phone, bookingTime, appointmentTime, guests
 
     const Submit = () => {
         if (inputRef.current.value === 0 || inputRef.current.value === "") return;
-        let quantity = inputRef.current.value;
-        setList([...list, { customer, phone, id, appointmentTime }]);
+        let order = inputRef.current.value;
+        setList([...list, { customer, phone, id, order }]);
         inputRef.current.value = 0;
-    };
+    }
 
     const Check = () => {
         const inputValue = inputRef.current.value;
         if (!isNaN(inputValue) && Number(inputValue) <= 0) {
             inputRef.current.value = 0;
         }
-    };
+    }
 
     const openEditModal = () => {
         setEditModalIsOpen(true);
     }
-    const apiMethod = async (customer, service, id) => {
+    const apiMethod = async (customer, phone, id) => {
         let response = await updateReservation(customer, phone, id, appointmentTime);
         if (response.ok) {
             setReservations([...reservations.filter(reservation => reservation.id != id), { id: id, customer: customer, phone: phone, appointmentTime: appointmentTime }]);
@@ -51,12 +51,11 @@ function Reservation({ id, customer, phone, bookingTime, appointmentTime, guests
             <div className="reservationBox">
                 <EditIcon className="inline editIcon" onClick={openEditModal} />
                 <CloseIcon className="inline-right closeIcon" onClick={deleteItem} />
-                <div className="center">{customer}</div>
+                <div className="center">{id}</div>
+                <p>Name: {customer}</p>
                 <p>Phone: {phone}</p>
-                <p>Booking Time: {new Date(bookingTime).toLocaleString()}</p>
                 <p>Appointment Time: {new Date(appointmentTime).toLocaleString()}</p>
                 <p>Guests: {guests}</p>
-                <p>Employee ID: {employee}</p>
             </div>
             <CreateReservationModal modalIsOpen={editModalIsOpen} setModalIsOpen={setEditModalIsOpen} apiMethod={apiMethod} id={id} />
         </>
