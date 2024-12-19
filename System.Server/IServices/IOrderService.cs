@@ -9,7 +9,7 @@ namespace System.Server.IServices
         Task<IEnumerable<OrderGetDTO>> GetAllUnpaidOrders();
         Task<OrderGetDTO> GetOrderById(long id);
         Task CreateOrder(OrderPostDTO order);
-        Task UpdateOrder(long orderId, OrderUpdateDTO order);  
+        Task UpdateOrder(long orderId, OrderPostDTO order);  
         Task DeleteOrder(long id);
         Task PayForOrder(long id, PaymentResponseDTO payment);
         decimal CalculateOrderPrice(List<OrderGetProductDTO> products);
