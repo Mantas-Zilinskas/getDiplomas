@@ -21,8 +21,8 @@ export const createOrder = async (object) => {
 }
 
 export const getOrder = async (order) => {
-
-    return fetch('https://localhost:7089/api/Order/' + order, {
+    
+    return await fetch('https://localhost:7089/api/Order/' + order, {
         method: 'Get',
         headers: {
             'Content-Type': 'application/json',

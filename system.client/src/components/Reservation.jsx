@@ -5,10 +5,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import { deleteReservation, updateReservation } from "../api/ReservationApi";
 import EditIcon from '@mui/icons-material/Edit';
 import CreateReservationModal from "./modals/CreateReservationModal"
+import ReservationDetailsModal from "./modals/ReservationDetailsModal";
 
 function Reservation({ id, orderId, customer, phone, setList, list, appointmentTime, guests}) {
     const { reservations, setReservations } = useContext(ReservationContext);
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+    const [detailsModalIsOpen, setDetailsModalIsOpen] = useState(false);
 
     const inputRef = useRef();
 
@@ -38,7 +40,11 @@ function Reservation({ id, orderId, customer, phone, setList, list, appointmentT
 
     const openEditModal = () => {
         setEditModalIsOpen(true);
-    }                       
+    }                 
+    const openDetailsModal = () => {
+        setDetailsModalIsOpen(true);
+    }
+
     const apiMethod = async (name, phone, date, guests, orderId) => {
         let object = {
             "bookingTime": "2024-12-19T20:30:52.760Z",
@@ -61,12 +67,14 @@ function Reservation({ id, orderId, customer, phone, setList, list, appointmentT
                 <EditIcon className="inline editIcon" onClick={openEditModal} />
                 <CloseIcon className="inline-right closeIcon" onClick={deleteItem} />
                 <div className="center">Order id: {orderId}</div>
+                <button onClick={openDetailsModal}>Order details</button>
                 <p>Name: {customer}</p>
                 <p>Phone: {phone}</p>
                 <p>Reservation Time: {new Date(appointmentTime).toLocaleString()}</p>
                 <p>Guests: {guests}</p>
             </div>
             <CreateReservationModal modalIsOpen={editModalIsOpen} setModalIsOpen={setEditModalIsOpen} apiMethod={apiMethod} id={id} />
+            <ReservationDetailsModal id={orderId} modalIsOpen={detailsModalIsOpen} setModalIsOpen={setDetailsModalIsOpen} />
         </>
     );
 }
