@@ -1,4 +1,4 @@
-.createReservationModalOverlay {
+.infoModalOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,19 +11,14 @@
     z-index: 1000;
 }
 
-.createReservationModalContent {
+.infoModalContent {
     background-color: white;
     padding: 25px;
     color: black;
     border-radius: 15px;
-    min-width: 400px;
+    padding 10px;
 }
 
-    .createReservationModalContent .input {
-        height: 25px;
-        width: 100%;
-    }
-
-    .createReservationModalContent .error {
-        color: red;
-    }
+.infoModalContent button{
+    margin: 0 40%;
+}
