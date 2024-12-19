@@ -117,7 +117,6 @@ namespace System.Server.Services
             _context.Orders.Add(newOrder);
             await _context.SaveChangesAsync();
 
-            var n = order.Products.Count;
             foreach (var p in order.Products)
             {
                 var orderProduct = new OrderProduct
@@ -131,10 +130,39 @@ namespace System.Server.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateOrder(long id, OrderUpdateDTO order)
+        public async Task UpdateOrder(long id, OrderPostDTO newOrder)
         {
-            //todo
-            await _context.SaveChangesAsync();
+            var oldOrder = await _context.Orders.FindAsync(id);
+            if (oldOrder == null)
+            {
+                throw new KeyNotFoundException($"Order with ID {id} not found.");
+            }
+            else
+            {
+                oldOrder.UserId = newOrder.UserId;
+                oldOrder.Tip = newOrder.Tip;
+                oldOrder.DiscountId = newOrder.DiscountId;
+                oldOrder.ReservationId = newOrder.ReservationId;
+
+                var orderProducts = await _context.OrderProducts
+                    .Where(op => op.OrderId == oldOrder.Id)
+                    .ToListAsync();
+                foreach (var product in orderProducts)
+                { 
+                    _context.OrderProducts.Remove(product);
+                }
+                foreach (var p in newOrder.Products)
+                {
+                    var orderProduct = new OrderProduct
+                    {
+                        OrderId = oldOrder.Id,
+                        ProductId = p.ProductId,
+                        Quantity = p.Quantity
+                    };
+                    _context.OrderProducts.Add(orderProduct);
+                }
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteOrder(long id)

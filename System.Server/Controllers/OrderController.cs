@@ -54,7 +54,7 @@ namespace System.Server.Controllers
             return Ok(order);
         }
         [HttpPut("{orderId}")]
-        public async Task<IActionResult> Put(long orderId, [FromBody] OrderUpdateDTO order)
+        public async Task<IActionResult> Put(long orderId, [FromBody] OrderPostDTO order)
         {
             await _orderService.UpdateOrder(orderId, order);
             return Ok();
