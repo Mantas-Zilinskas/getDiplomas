@@ -21,7 +21,6 @@ function AddReservation() {
             "customerPhoneNumber": phone,
             "numberOfGuests": guests,
             "orderId": orderId
-
         }
 
         try {

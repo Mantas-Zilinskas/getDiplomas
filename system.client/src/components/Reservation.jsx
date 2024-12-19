@@ -38,11 +38,20 @@ function Reservation({ id, orderId, customer, phone, setList, list, appointmentT
 
     const openEditModal = () => {
         setEditModalIsOpen(true);
-    }
-    const apiMethod = async (customer, phone, id) => {
-        let response = await updateReservation(customer, phone, id, appointmentTime);
+    }                       
+    const apiMethod = async (name, phone, date, guests, orderId) => {
+        let object = {
+            "bookingTime": "2024-12-19T20:30:52.760Z",
+            "appointmentTime": date,
+            "employeeId": 0,
+            "customerName": name,
+            "customerPhoneNumber": phone,
+            "numberOfGuests": guests,
+            "orderId": orderId
+        }
+        let response = await updateReservation(id, object);
         if (response.ok) {
-            setReservations([...reservations.filter(reservation => reservation.id != id), { id: id, customer: customer, phone: phone, appointmentTime: appointmentTime }]);
+            setReservations([...reservations.filter(reservation => reservation.id != id), object]);
         }
     }
 
@@ -54,7 +63,7 @@ function Reservation({ id, orderId, customer, phone, setList, list, appointmentT
                 <div className="center">Order id: {orderId}</div>
                 <p>Name: {customer}</p>
                 <p>Phone: {phone}</p>
-                <p>Appointment Time: {new Date(appointmentTime).toLocaleString()}</p>
+                <p>Reservation Time: {new Date(appointmentTime).toLocaleString()}</p>
                 <p>Guests: {guests}</p>
             </div>
             <CreateReservationModal modalIsOpen={editModalIsOpen} setModalIsOpen={setEditModalIsOpen} apiMethod={apiMethod} id={id} />

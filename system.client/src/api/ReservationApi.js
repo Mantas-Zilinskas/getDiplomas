@@ -57,24 +57,20 @@ export const createReservation = async (object) => {
 };
 
 export const updateReservation = async (reservationId, reservation) => {
-    return fetch(`https://localhost:7089/api/Reservation/${reservationId}`, {
+    return await fetch(`https://localhost:7089/api/Reservation/${reservationId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reservation),
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok " + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Updated reservation:", data);
-            return data;
-        })
-        .catch(error => {
-            console.error("There was a problem with the fetch operation:", error);
-        });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response;
+    })
+    .catch(error => {
+        console.error("There was a problem with the fetch operation:", error);
+    });
 };
 
 export const deleteReservation = async (reservationId) => {
