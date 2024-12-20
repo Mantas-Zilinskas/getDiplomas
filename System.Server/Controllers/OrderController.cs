@@ -47,9 +47,8 @@ namespace System.Server.Controllers
         public async Task<IActionResult> GetById(long orderId)
         {
             var order = await _orderService.GetOrderById(orderId);
-            if (order == null)
-            {
-                return NotFound();
+            if (order == null) {
+                return Ok(new { });
             }
             return Ok(order);
         }

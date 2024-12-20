@@ -9,23 +9,27 @@ import { createContext, useState} from "react";
 
 export const ProductContext = createContext();
 export const OrderContext = createContext();
+export const ReservationContext = createContext();
 
 function App() {
     const [products, setProducts] = useState([]);
     const [orders, setOrders] = useState([]);
+    const [reservations, setReservations] = useState([]);
 
   return (
     <>
         <Router>
             <ProductContext.Provider value={{ products, setProducts }}>
-                <OrderContext.Provider value={{ orders, setOrders}}>
-                    <Routes>
+                  <OrderContext.Provider value={{ orders, setOrders }}>
+                      <ReservationContext.Provider value={{ reservations, setReservations }}>
+                        <Routes>
                         <Route path="/EditOrder" element={<EditOrderLayout/>} />
                         <Route path="/" element={<OrderLayout />} />
                         <Route path="/Catalog" element={<CatalogLayout />} />
                         <Route path="/Reservations" element={<ReservationsLayout />} />
                         <Route path="/Taxes" element={<TaxesLayout />} />
-                    </Routes>
+                        </Routes>
+                    </ReservationContext.Provider>
                 </OrderContext.Provider>
             </ProductContext.Provider>
         </Router>

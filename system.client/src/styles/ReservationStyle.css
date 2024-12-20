@@ -1,0 +1,56 @@
+.reservationBox {
+    display: inline-block;
+    padding: 20px;
+    margin: 5px;
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+}
+
+    .reservationBox .center {
+        text-align: center;
+    }
+
+    .reservationBox .right {
+        margin-left: 10px;
+        margin-right: 0px;
+    }
+
+    .reservationBox .number-input {
+        height: 25px;
+        width: 50%;
+        max-width: 200px;
+        font-size: 14px;
+    }
+
+    .reservationBox .inline {
+        display: inline;
+    }
+
+    .reservationBox .inline-right {
+        display: inline;
+        float: right;
+    }
+
+    .reservationBox .closeIcon {
+        border-radius: 5px;
+        margin-left: 2px;
+    }
+
+    .reservationBox .editIcon {
+        border-radius: 5px;
+        margin-left: 2px;
+    }
+
+        .reservationBox .editIcon:hover {
+            background-color: grey;
+        }
+
+    .reservationBox .hover {
+        border-radius: 5px;
+        margin-left: 2px;
+    }
+
+    .reservationBox .closeIcon:hover {
+        background-color: grey;
+    }

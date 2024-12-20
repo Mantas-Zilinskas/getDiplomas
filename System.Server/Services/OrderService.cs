@@ -43,7 +43,7 @@ namespace System.Server.Services
             var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
-                throw new KeyNotFoundException($"Order with ID {id} not found.");
+                return null;
             }
             var newOrder = new OrderGetDTO
             {

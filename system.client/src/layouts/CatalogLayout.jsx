@@ -10,9 +10,10 @@ import {ProductContext} from '../App'
 export function CatalogLayout() {
     const { products, setProducts } = useContext(ProductContext);
     const [orderItems, setOrderItems] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        getProducts().then((data) => setProducts(data));
+        getProducts().then((data) => setProducts(data)).then(()=>setIsLoaded(true));
     }, []);
 
     return (
@@ -22,7 +23,7 @@ export function CatalogLayout() {
             <OrderCreationSidePanel items={orderItems} setItems={setOrderItems} />
             <div className="catalogContent">
                 <h1>Im Catalog</h1>
-                {products != null
+                {isLoaded
                 ?
                     products.map((product) => (
                         <Product
@@ -35,7 +36,7 @@ export function CatalogLayout() {
                     ))
                 :
                     (<h2>Loading Please wait</h2>)}
-                {products != null
+                {isLoaded
                 ?
                     <AddProduct/>
                 :(null)}
